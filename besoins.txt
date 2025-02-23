@@ -1,0 +1,10 @@
+Resident
+Personnel(infirmiers, cuisiniers,animateur)
+medecin
+Administrateur du centre
+Personne
+Famille / Proches
+Visiteur
+Gestionnaire de stock
+Gestionnaire financier
+
