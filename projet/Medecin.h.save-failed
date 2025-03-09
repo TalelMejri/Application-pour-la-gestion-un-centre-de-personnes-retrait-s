@@ -1,0 +1,22 @@
+#ifndef MEDECIN_H_INCLUDED
+#define MEDECIN_H_INCLUDED
+
+#include "Personnel.h"
+
+class Medecin : public Personnel {
+private:
+    string specialite;
+
+public:
+    Medecin();
+    Medecin(int, string, string, string, string, string, string, DATE, double, string);
+    ~Medecin();
+
+    void afficherPersonne() override;
+    void modifier() override;
+
+    string getSpecialite() { return specialite; }
+    void setSpecialite(string spec) { specialite = spec; }
+};
+
+#endif // MEDECIN_H_INCLUDED
