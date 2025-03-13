@@ -7,10 +7,10 @@ class EtageAlzheimer : public Etage {
 public:
     EtageAlzheimer(int id) : Etage(id, "Alzheimer") {}
 
-    void afficherEtage()  {
+    void afficherEtage() {
         cout << "Etage Alzheimer - ID: " << id << endl;
-        for (auto chambre : chambres) {
-            chambre->afficherChambre();
+        for (size_t i = 0; i < chambres.size(); ++i) {
+            chambres[i]->afficherChambre();
         }
     }
 };

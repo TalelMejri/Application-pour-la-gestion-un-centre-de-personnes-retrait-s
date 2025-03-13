@@ -4,36 +4,36 @@
 #include <iostream>
 using namespace std;
 
-typedef struct date {
+typedef struct date_med {
     int jour;
     int mois;
     int annee;
-} DATE;
+} DATE_Med;
 
 class Medicament {
 private:
     int id;
     string nom;
     int quantite;
-    DATE dateLimit;
+    DATE_Med dateLimit;
 
 public:
     Medicament();
-    Medicament(int, string, int, DATE);
+    Medicament(int, string, int, DATE_Med);
     ~Medicament();
 
     void afficherMedicament();
-    bool estPerime(DATE dateActuelle);
+    bool estPerime(DATE_Med dateActuelle);
 
     int getId() { return id; }
     string getNom() { return nom; }
     int getQuantite() { return quantite; }
-    DATE getDateLimit() { return dateLimit; }
+    DATE_Med getDateLimit() { return dateLimit; }
 
     void setId(int idVal) { id = idVal; }
     void setNom(string nomVal) { nom = nomVal; }
     void setQuantite(int qteVal) { quantite = qteVal; }
-    void setDateLimit(DATE dateVal) { dateLimit = dateVal; }
+    void setDateLimit(DATE_Med dateVal) { dateLimit = dateVal; }
 };
 
 #endif // MEDICAMENT_H_INCLUDED

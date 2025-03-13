@@ -7,7 +7,7 @@ class ChambrePatient : public Chambre {
 public:
     ChambrePatient(int id) : Chambre(id, "Patient") {}
 
-    void afficherChambre() override {
+    void afficherChambre()  {
         cout << "Chambre Patient - ID: " << id << endl;
     }
 };

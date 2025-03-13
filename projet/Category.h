@@ -17,7 +17,7 @@ private:
 public:
     Category();
     Category(int, string, string);
-    ~Category();
+   // ~Category();
 
     void ajouterMedicament(Medicament);
     void afficherCategory();

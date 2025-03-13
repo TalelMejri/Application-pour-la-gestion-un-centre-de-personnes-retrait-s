@@ -26,7 +26,7 @@ class Personne{
         Personne(int, string, string, string, string, string, string, DATE);
         Personne(const Personne&);
         virtual ~Personne();
-        virtual void afficherPersonne()=0;
+        virtual void afficherPersonne() ;
         virtual void modifier()=0;
         void saisir_personne();
 

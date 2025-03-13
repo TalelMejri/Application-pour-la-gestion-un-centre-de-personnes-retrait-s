@@ -9,8 +9,8 @@ private:
 
 public:
     Infirmier();
-    Infirmier(int, string, string, string, string, string, string, DATE, double, int);
-    ~Infirmier();
+    Infirmier(int, string, string, string, string, string, string, DATE, double, string, int);
+  ~Infirmier();
 
     void afficherPersonne() ;
     void modifier() ;

@@ -17,9 +17,9 @@ public:
     void ajouterEmploye(Personnel* employe);
     void supprimerEmploye(int id);
     void afficherEmployes();
-    void modifierEmploye(int id);
+    void modifier(int id);
+    int rechercherEmploye(int);
 
-    void modifier() ;
 };
 
 #endif // RESPONSABLE_H_INCLUDED

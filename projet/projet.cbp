@@ -32,6 +32,66 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Batiment.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="Category.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="Chambre.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="ChambreMultiple.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ChambrePatient.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="ChambrePersonnel.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="DossierMedical.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="Etage.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="EtageAlzheimer.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="EtageCardio.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="EtageNeurologie.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="Infirmier.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="Medecin.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="MedecinInfirmier.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="Medicament.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="Personne.cpp">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="Personne.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="Personnel.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="Resident.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="Responsable.h">
+			<Option target="Debug" />
+		</Unit>
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>

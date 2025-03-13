@@ -5,7 +5,7 @@
 
 class Personnel : public Personne {
 protected:
-    string poste;.
+    string poste;
     double salaire;
 
 public:

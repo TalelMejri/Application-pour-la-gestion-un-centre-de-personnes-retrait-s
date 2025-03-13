@@ -4,13 +4,12 @@
 #include "ChambrePersonnel.h"
 #include "ChambrePatient.h"
 
-class ChambreMultiple : public ChambrePatient, public ChambrePersonnel{
+class ChambreMultiple : public ChambrePatient, public ChambrePersonnel {
 private:
     bool isOccupiedByPatient;
 
 public:
-    ChambreMultiple(int, string,bool);
-    isOccupiedByPatient(false) {}
+    ChambreMultiple(int id, string type, bool occupied);
 
     void occuperChambre() {
         isOccupiedByPatient = true;
@@ -21,7 +20,7 @@ public:
     }
 
     void afficherChambreMultiple() {
-        afficherChambre();
+        ChambrePatient::afficherChambre();
         if (isOccupiedByPatient) {
             cout << "Cette chambre est occupée par un patient." << endl;
         } else {

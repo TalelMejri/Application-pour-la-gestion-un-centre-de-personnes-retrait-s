@@ -7,10 +7,10 @@ class EtageCardio : public Etage {
 public:
     EtageCardio(int id) : Etage(id, "Cardio") {}
 
-    void afficherEtage()  {
+    void afficherEtage() {
         cout << "Etage Cardio - ID: " << id << endl;
-        for (auto chambre : chambres) {
-            chambre->afficherChambre();
+        for (size_t i = 0; i < chambres.size(); ++i) {
+            chambres[i]->afficherChambre();
         }
     }
 };

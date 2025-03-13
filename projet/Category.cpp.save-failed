@@ -1,0 +1,29 @@
+#include "Category.h"
+
+// Default constructor
+Category::Category() : id(0), nom(""), description("") {}
+
+// Parameterized constructor
+Category::Category(int idVal, string nomVal, string descVal)
+    : id(idVal), nom(nomVal), description(descVal) {}
+
+// Destructor
+Category::~Category() {
+    // Destructor logic if needed (currently nothing to clean up)
+}
+
+// Method to add a medicament to the category
+void Category::ajouterMedicament(Medicament medicament) {
+    medicaments.push_back(medicament);
+}
+
+// Method to display the category's details
+void Category::afficherCategory() {
+    cout << "Category ID: " << id << endl;
+    cout << "Nom: " << nom << endl;
+    cout << "Description: " << description << endl;
+    cout << "Medicaments in this category: " << endl;
+    for (const auto& medicament : medicaments) {
+        medicament.afficherMedicament();
+    }
+}

@@ -15,11 +15,9 @@ public:
 
     virtual void afficherChambre() = 0;
 
-    // Getters
     int getId() { return id; }
     string getType() { return type; }
 
-    // Setters
     void setId(int idVal) { id = idVal; }
     void setType(string typeVal) { type = typeVal; }
 };

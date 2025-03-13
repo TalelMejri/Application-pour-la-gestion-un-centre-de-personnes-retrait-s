@@ -14,7 +14,8 @@ public:
     Resident(int, string, string, string, string, string, string, DATE, float);
     ~Resident();
 
-    void afficherResident();
+    void afficherPersonne();
+    void modifier() ;
     void modifierSolde(float);
 
     float getSolde() { return solde; }
