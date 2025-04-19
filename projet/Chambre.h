@@ -6,20 +6,20 @@
 class Chambre {
 protected:
     int id;
-    string type;
+    int floorNumber;
 
 public:
     Chambre();
-    Chambre(int, string);
+    Chambre(int, int);
     virtual ~Chambre() {}
 
     virtual void afficherChambre() = 0;
 
     int getId() { return id; }
-    string getType() { return type; }
+    int getfloorNumber() { return floorNumber; }
 
     void setId(int idVal) { id = idVal; }
-    void setType(string typeVal) { type = typeVal; }
+    void setfloorNumber(int floor){floorNumber=floor;}
 };
 
 #endif // CHAMBRE_H_INCLUDED

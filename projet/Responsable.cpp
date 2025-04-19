@@ -32,18 +32,18 @@ void Responsable::supprimerEmploye(int id) {
     int index = rechercherEmploye(id);
     if (index != -1) {
         employes.erase(employes.begin() + index);
-        cout << "Employé supprimé avec succès." << endl;
+        cout << "Employe supprime avec succes." << endl;
     } else {
-        cout << "Employé introuvable." << endl;
+        cout << "Employe introuvable." << endl;
     }
 }
 
 void Responsable::afficherEmployes() {
     if (employes.empty()) {
-        cout << "Aucun employé à afficher." << endl;
+        cout << "Aucun employe à afficher." << endl;
         return;
     }
-    cout << "Liste des employés :" << endl;
+    cout << "Liste des employes :" << endl;
      for (size_t i = 0; i < employes.size(); i++) {
         employes[i]->afficherPersonne();
         cout << "-----------------------------" << endl;

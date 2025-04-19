@@ -9,7 +9,7 @@ private:
     bool isOccupiedByPatient;
 
 public:
-    ChambreMultiple(int id, string type, bool occupied);
+    ChambreMultiple(int id, int  floor,bool IsVisited,bool estEquipee, bool occupied);
 
     void occuperChambre() {
         isOccupiedByPatient = true;
@@ -19,14 +19,7 @@ public:
         isOccupiedByPatient = false;
     }
 
-    void afficherChambreMultiple() {
-        ChambrePatient::afficherChambre();
-        if (isOccupiedByPatient) {
-            cout << "Cette chambre est occupée par un patient." << endl;
-        } else {
-            cout << "Cette chambre est libre." << endl;
-        }
-    }
+    void afficherChambreMultiple();
 
     virtual ~ChambreMultiple() {}
 };

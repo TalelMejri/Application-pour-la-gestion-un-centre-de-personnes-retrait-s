@@ -4,12 +4,10 @@
 #include "Chambre.h"
 
 class ChambrePatient : public Chambre {
+    bool IsVisited;
 public:
-    ChambrePatient(int id) : Chambre(id, "Patient") {}
-
-    void afficherChambre()  {
-        cout << "Chambre Patient - ID: " << id << endl;
-    }
+     ChambrePatient(int ,int,bool);
+     void afficherChambre();
 };
 
 #endif // CHAMBREPATIENT_H_INCLUDED

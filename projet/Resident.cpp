@@ -8,7 +8,7 @@ Resident::Resident(int idVal, string nomVal, string prenomVal, string emailVal, 
                    string telVal, string sexeVal, DATE dateNaissanceVal, float soldeInit)
     : Personne(idVal, nomVal, prenomVal, emailVal, adresseVal, telVal, sexeVal, dateNaissanceVal){
           solde = soldeInit;
-          dossierMedical = nullptr;
+          dossierMedical = NULL;
     }
 
 Resident::~Resident() {

@@ -3,7 +3,7 @@
 
 #include "Personnel.h"
 
-class Infirmier : public Personnel {
+class Infirmier :virtual  public Personnel {
 private:
     int experience;
 

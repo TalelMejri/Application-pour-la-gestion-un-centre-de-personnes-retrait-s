@@ -2,8 +2,8 @@
 #include <iostream>
 using namespace std;
 
-Chambre::Chambre(int idVal, string typeVal) {
+Chambre::Chambre(int idVal,int floor) {
     id=idVal;
-    type=typeVal;
+    floorNumber=floor;
 }
 

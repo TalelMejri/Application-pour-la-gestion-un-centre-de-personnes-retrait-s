@@ -5,11 +5,12 @@
 #include "Category.h"
 #include <vector>
 
-class Medecin : public Personne {
+class Medecin : virtual public Personne {
 private:
     double salaire;
     string specialite;
     vector<Category> categories;
+  //  set<Resident> residents;
 
 public:
     Medecin();

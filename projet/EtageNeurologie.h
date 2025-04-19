@@ -4,15 +4,10 @@
 #include "Etage.h"
 
 class EtageNeurologie : public Etage {
+    int nbr_chambre;
 public:
-    EtageNeurologie(int id) : Etage(id, "Neurologie") {}
-
-    void afficherEtage()  {
-        cout << "Etage Neurologie - ID: " << id << endl;
-        for (auto chambre : chambres) {
-            chambre->afficherChambre();
-        }
-    }
+    EtageNeurologie(int,int,string);
+    void afficherEtage() ;
 };
 
 #endif // ETAGENUROLOGIE_H_INCLUDED

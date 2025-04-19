@@ -4,15 +4,10 @@
 #include "Etage.h"
 
 class EtageCardio : public Etage {
+     int nbr_chambre;
 public:
-    EtageCardio(int id) : Etage(id, "Cardio") {}
-
-    void afficherEtage() {
-        cout << "Etage Cardio - ID: " << id << endl;
-        for (size_t i = 0; i < chambres.size(); ++i) {
-            chambres[i]->afficherChambre();
-        }
-    }
+    EtageCardio(int ,int,string);
+    void afficherEtage() ;
 };
 
 #endif // ETAGECARDIO_H_INCLUDED

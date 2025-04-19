@@ -9,16 +9,16 @@ using namespace std;
 
 class DossierMedical {
 private:
-    vector<Medicament> medicaments;
+    vector<Medicament*> medicaments;
 
 public:
     DossierMedical();
     ~DossierMedical();
 
-    void ajouterMedicament(Medicament medicament);
+    void ajouterMedicament(Medicament* medicament);
     void afficherDossierMedical();
 
-    vector<Medicament> getMedicaments() { return medicaments; }
+    vector<Medicament*> getMedicaments() { return medicaments; }
 };
 
 #endif // DOSSIERMEDICAL_H_INCLUDED

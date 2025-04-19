@@ -51,25 +51,24 @@ Personne::~Personne() {
 void Personne::saisir_personne() {
     cout << "Entrez l'ID : ";
     cin >> id;
-    cin.ignore();
 
     cout << "Entrez le nom : ";
-    getline(cin, nom);
+    cin>>nom;
 
     cout << "Entrez le prénom : ";
-    getline(cin, prenom);
+    cin>>prenom;
 
     cout << "Entrez le CIN : ";
-    getline(cin, cinn);
+    cin>>cinn;
 
     cout << "Entrez l'email : ";
-    getline(cin, email);
+    cin>>email;
 
     cout << "Entrez le mot de passe : ";
-    getline(cin, password);
+    cin>>password;
 
     cout << "Entrez le téléphone : ";
-    getline(cin, tlf);
+    cin>>tlf;
 
     cout << "Entrez la date de naissance (jour mois année) : ";
     cin >> date_naissance.jour >> date_naissance.mois >> date_naissance.anne;

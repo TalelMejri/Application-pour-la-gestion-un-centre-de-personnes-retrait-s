@@ -8,7 +8,7 @@ DossierMedical::DossierMedical() {}
 DossierMedical::~DossierMedical() {
 }
 
-void DossierMedical::ajouterMedicament(Medicament medicament) {
+void DossierMedical::ajouterMedicament(Medicament* medicament) {
     medicaments.push_back(medicament);
 }
 
@@ -18,7 +18,7 @@ void DossierMedical::afficherDossierMedical() {
     } else {
         for (size_t i = 0; i < medicaments.size(); ++i) {
             cout << "Medicament " << i + 1 << ":" << endl;
-            medicaments[i].afficherMedicament();
+            medicaments[i]->afficherMedicament();
             cout << endl;
         }
     }

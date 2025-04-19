@@ -7,8 +7,8 @@ Category::Category() : id(0), nom(""), description("") {}
 Category::Category(int idVal, string nomVal, string descVal)
     : id(idVal), nom(nomVal), description(descVal) {}
 
-/*Category::~Category() {
-}*/
+Category::~Category() {
+}
 
 void Category::ajouterMedicament(Medicament medicament) {
     medicaments.push_back(medicament);
