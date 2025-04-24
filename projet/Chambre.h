@@ -19,7 +19,6 @@ public:
     friend ostream& operator <<(ostream&, const Chambre*);
     friend istream& operator >>(istream&, Chambre*);
 
-
     Chambre(const Chambre&);
 
     virtual void afficherChambre() = 0;

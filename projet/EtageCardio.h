@@ -4,10 +4,21 @@
 #include "Etage.h"
 
 class EtageCardio : public Etage {
-     int nbr_chambre;
+    int nbr_chambre;
 public:
-    EtageCardio(int ,int,string);
-    void afficherEtage() ;
+    EtageCardio(int,int,string);
+    EtageCardio();
+    virtual ~EtageCardio();
+    EtageCardio& operator=(const EtageCardio&);
+    EtageCardio(const EtageCardio&);
+
+    friend ostream& operator <<(ostream&, const EtageCardio&);
+    friend istream& operator >>(istream&, EtageCardio&);
+    friend ostream& operator <<(ostream&, const EtageCardio*);
+    friend istream& operator >>(istream&, EtageCardio*);
+
+    void afficherEtageCardio() ;
+
 };
 
 #endif // ETAGECARDIO_H_INCLUDED

@@ -8,26 +8,26 @@ Chambre::Chambre(int idVal,int floor) {
 }
 
 friend ostream& operator <<(ostream& os , const Chambre& chambre);{
-    os<<"id: "<<chambre.id;
-    os<<"FloorNumber: "<<chambre.floorNumber;
+    os<<" "<<chambre.id;
+    os<<" "<<chambre.floorNumber;
 }
 
 friend ostream& operator <<(ostream& os , const Chambre* chambre);{
-    os<<"id: "<<chambre->id;
-    os<<"FloorNumber: "<<chambre->floorNumber;
+    os<<" "<<chambre->id;
+    os<<" "<<chambre->floorNumber;
 }
 
-friend istream& operator >>(istream& is , const Chambre& chambre);{
-    cout<<"id: ";
+ istream& operator >>(istream& is , const Chambre& chambre);{
+    cout<<"  ";
     is>>chambre.id;
-    cout<<"FloorNumber: ";
+    cout<<" ";
     is>>chambre.floorNumber;
 }
 
 friend istream& operator >>(istream& is , const Chambre* chambre);{
-    cout<<"id: ";
+    cout<<" ";
     is>>chambre->id;
-    cout<<"FloorNumber: ";
+    cout<<" ";
     is>>chambre->floorNumber;
 }
 

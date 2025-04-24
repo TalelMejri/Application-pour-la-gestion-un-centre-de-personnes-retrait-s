@@ -4,10 +4,21 @@
 #include "Etage.h"
 
 class EtageAlzheimer : public Etage {
- int nbr_chambre;
+    int nbr_chambre;
 public:
-    EtageAlzheimer(int id,int,string);
-    void afficherEtage() ;
+    EtageAlzheimer(int,int,string);
+    EtageAlzheimer();
+    virtual ~EtageAlzheimer();
+    EtageAlzheimer& operator=(const EtageAlzheimer&);
+    EtageAlzheimer(const EtageAlzheimer&);
+
+    friend ostream& operator <<(ostream&, const EtageAlzheimer&);
+    friend istream& operator >>(istream&, EtageAlzheimer&);
+    friend ostream& operator <<(ostream&, const EtageAlzheimer*);
+    friend istream& operator >>(istream&, EtageAlzheimer*);
+
+    void afficherEtageAlzheimer() ;
+
 };
 
 #endif // ETAGEALZHEIMER_H_INCLUDED

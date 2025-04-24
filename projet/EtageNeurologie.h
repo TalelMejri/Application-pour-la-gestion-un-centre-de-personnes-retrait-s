@@ -5,9 +5,21 @@
 
 class EtageNeurologie : public Etage {
     int nbr_chambre;
-public:
-    EtageNeurologie(int,int,string);
-    void afficherEtage() ;
+    public:
+        EtageNeurologie(int,int,string);
+        EtageNeurologie();
+        virtual ~EtageNeurologie();
+        EtageNeurologie& operator=(const EtageNeurologie&);
+        EtageNeurologie(const EtageNeurologie&);
+    
+        friend ostream& operator <<(ostream&, const EtageNeurologie&);
+        friend istream& operator >>(istream&, EtageNeurologie&);
+        friend ostream& operator <<(ostream&, const EtageNeurologie*);
+        friend istream& operator >>(istream&, EtageNeurologie*);
+    
+        void afficherEtageNeurologie() ;
+    
 };
+
 
 #endif // ETAGENUROLOGIE_H_INCLUDED

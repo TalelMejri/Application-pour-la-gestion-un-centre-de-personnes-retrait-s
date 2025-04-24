@@ -15,13 +15,16 @@ public:
     Etage(int, string);
     virtual ~Etage();
     Etage& operator=(const Etage&);
-
+    Etage(const Etage&);
     friend ostream& operator <<(ostream&, const Etage&);
     friend istream& operator >>(istream&, Etage&);
     friend ostream& operator <<(ostream&, const Etage*);
     friend istream& operator >>(istream&, Etage*);
 
     void ajouterChambre(Chambre* chambre);
+    void ModifierChambre(int id);
+    void SupprimerChambre(int id);
+    void AfficherChambre();
     virtual void afficherEtage() = 0;
 
     int getId() { return id; }

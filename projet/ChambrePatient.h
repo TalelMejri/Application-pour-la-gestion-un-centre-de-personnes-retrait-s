@@ -6,8 +6,23 @@
 class ChambrePatient : public Chambre {
     bool IsVisited;
 public:
-     ChambrePatient(int ,int,bool);
-     void afficherChambre();
+    ChambrePatient();
+    ChambrePatient(int, int);
+    virtual ~ChambrePatient();
+    ChambrePatient& operator=(const ChambrePatient&);
+
+    friend ostream& operator <<(ostream&, const ChambrePatient&);
+    friend istream& operator >>(istream&, ChambrePatient&);
+    friend ostream& operator <<(ostream&, const ChambrePatient*);
+    friend istream& operator >>(istream&, ChambrePatient*);
+
+    ChambrePatient(const ChambrePatient&);
+
+    void afficherChambrePatient();
+
+    bool getIsVisited() { return IsVisited; }
+
+    void setIsVisited() { IsVisited!=IsVisited}
 };
 
 #endif // CHAMBREPATIENT_H_INCLUDED
