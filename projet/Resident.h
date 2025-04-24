@@ -11,12 +11,20 @@ private:
 
 public:
     Resident();
-    Resident(int, string, string, string, string, string, string, DATE, float);
+    Resident(int, string, string, string, string, string, string, DatePerso, float);
+    Resident(const Resident&);
     ~Resident();
-
+    friend ostream& operator <<(ostream&,const Resident &);
+    friend istream& operator >>(istream& ,Resident&);
+    friend ostream& operator <<(ostream&,const Resident *);
+    friend istream& operator >>(istream& ,Resident*);
+    Resident & operator=(const Resident&) ;
+    void ecrirerResidentDansFichier();
     void afficherPersonne();
     void modifier() ;
     void modifierSolde(float);
+    void saisirResident();
+
 
     float getSolde() { return solde; }
     DossierMedical* getDossierMedical() { return dossierMedical; }

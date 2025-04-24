@@ -1,26 +1,18 @@
 #include <iostream>
 #include <vector>
 #include <unistd.h>
-#include "Batiment.cpp"
-#include "Etage.cpp"
-#include "Chambre.h"
-#include "ChambrePatient.h"
-#include "ChambrePersonnel.h"
-#include "ChambreMultiple.h"
-#include "Medicament.h"
-#include "DossierMedical.h"
-#include "Medecin.h"
-#include "Infirmier.cpp"
-#include "Resident.h"
-#include "EtageCardio.cpp"
-#include "Responsable.h"
-#include "Category.cpp"
-#include "EtageAlzheimer.cpp"
 #include <stdio.h>
 #include <fstream>
+#include <cstdlib>
+#include <thread>
+#include <chrono>
+#include "Resident.h"
+#include "Medecin.h"
+#include "Infirmier.h"
+#include "MedecinInfirmier.h"
+#include "Responsable.h"
 
 using namespace std;
-
 
 class credentials {
 public:
@@ -29,23 +21,20 @@ public:
     string role;
 };
 
-// Fonction pour afficher une animation de chargement
 void afficherChargement(const char* message, int duree) {
     printf("\n\n%60s", message);
     fflush(stdout);
     for (int i = 0; i < duree; i++) {
         printf(".");
         fflush(stdout);
-        // sleep(1); // à activer si besoin
+         sleep(1);
     }
     printf("\n");
 }
 
-// Fonction pour vérifier l'email et le mot de passe
 string VerifierEmailPassword(string email, string pass) {
     fstream f("BD\\credentials.txt");
     if (!f.is_open()) exit(-1);
-
     credentials c;
     while (f >> c.email >> c.password >> c.role) {
         if (c.email == email && c.password == pass) {
@@ -57,78 +46,187 @@ string VerifierEmailPassword(string email, string pass) {
     return "";
 }
 
-// Fonction pour s'inscrire (sign up)
-void inscrireResident() {
-    string nom, prenom, cinn, email, password, telf;
-
-    cout << "------ Inscription Resident ------" << endl;
-    cout << "Nom: "; cin >> nom;
-    cout << "Prenom: "; cin >> prenom;
-    cout << "CIN: "; cin >> cinn;
-    cout << "Email: "; cin >> email;
-    cout << "Mot de passe: "; cin >> password;
-    cout << "Telephone: "; cin >> telf;
-    // Enregistrer les infos dans Resident.txt
-    ofstream of("BD\\Resident.txt", ios::app);
+void resteConnecte(string email,string role){
+ ofstream of("BD\\reste_connecte.txt", ios::trunc);
     if (of.is_open()) {
-        of << nom << " " << prenom << " " << cinn << " " << email << " " << password << " " << telf << endl;
+        of << email << " " << role << endl;
         of.close();
     }
+}
 
-    // Enregistrer dans credentials.txt
+void inscrireResident() {
+    string nom, prenom, cinn, email, password, telf;
+    cout << "------ Inscription Resident ------" << endl;
+      /* Resident res;
+    cin>>res;
+    res.ecrirerResidentDansFichier();
+       Resident res1;
+    cin>>res1;
+    res1.ecrirerResidentDansFichier();*/
+
+    /*MedecinInfirmier med;
+    cin>>med;
+    cout<<med;
+    med.ecrirerMedecinInfDansFichier();*/
+
+    //Responsable r;
+    /*cin>>r;*/
+    //r.AfficherResident();
+    /*Infirmier* inf = new Infirmier;
+    cin >> *inf;*/
+    /*r.ajouterEmploye(inf);
+    r.afficherEmployes();
+    r.afficherPersonne();
+
+    Responsable r1;
+    cin>>r1;
+       Infirmier* inf1 = new Infirmier;
+    cin >> *inf1;
+    r1.ajouterEmploye(inf1);
+    r1.afficherEmployes();
+    r.afficherPersonne();
+
+    r1=r;
+    r1.afficherPersonne();*/
+
+    /*Infirmier inf;
+    cin>>inf;
+    inf.ecrirerInfirmierDansFichier();*/
+ /*  Medecin c;
+    cin>>c;
+    c.ecrirerMedecinDansFichier();*/
+    system("pause");
+    Resident res;
+    cin>>res;
+    res.ecrirerResidentDansFichier();
+
+
+    /*ofstream of("BD\\Resident.txt", ios::app);
+    if (of.is_open()) {
+        of << res.getId()<<" "<<res.getNom() << " " << res.getPassword() << " " << res.getCIN() << " " << res.getEmail() << " " << res.getPassword() << " " << res.getTlf() << " "<<res.getDateNaissance().jour<<"/"<<res.getDateNaissance().mois<<"/"<<res.getDateNaissance().anne<< endl;
+        of.close();
+    }*/
     ofstream off("BD\\credentials.txt", ios::app);
     if (off.is_open()) {
-        off << email << " " << password << " resident" << endl;
+        off << res.getEmail() << " " << res.getPassword()  << " resident" << endl;
         off.close();
     }
-
     cout << "\n✅ Inscription réussie ! Vous pouvez maintenant vous connecter.\n";
 }
 
-int main() {
-    afficherChargement("Chargement", 3);
-    system("cls");
-    system("color F0");
-
-    string email, password;
-    int choix;
-
-    cout << "----- Bienvenue -----" << endl;
-    cout << "1. Se connecter" << endl;
-    cout << "2. S'inscrire comme Resident" << endl;
-    cout << "Choix: ";
-    cin >> choix;
-
-    if (choix == 1) {
-        cout << "\n--- Connexion ---" << endl;
-        cout << "Email: ";
-        cin >> email;
-        cout << "Mot de passe: ";
-        cin >> password;
-
-        string role = VerifierEmailPassword(email, password);
-        if (role != "") {
-            cout << "\n✅ Connexion réussie en tant que " << role << endl;
-        } else {
-            cout << "\n❌ Compte introuvable. Souhaitez-vous vous inscrire ? (1 = Oui, 0 = Non): ";
-            int reponse;
-            cin >> reponse;
-            if (reponse == 1) {
-                inscrireResident();
-            } else {
-                cout << "Retour au menu." << endl;
-            }
-        }
-
-    } else if (choix == 2) {
-        inscrireResident();
-    } else {
-        cout << "❌ Choix invalide." << endl;
+credentials  CheckConnecter(){
+     credentials TestConnect;
+    ifstream off("BD\\reste_connecte.txt");
+      if (off.is_open() && off.peek() != ifstream::traits_type::eof()) {
+        off >> TestConnect.email >> TestConnect.role;
+        off.close();
+    }else{
+        TestConnect.email = "";
+        TestConnect.role = "";
     }
-
-    return 0;
+    return TestConnect;
 }
 
+void LogoutUser() {
+    ofstream off("BD\\reste_connecte.txt", ios::trunc);
+    if (off.is_open()) {
+        off.close();
+        cout << "✅ Déconnexion réussie." << endl;
+    } else {
+        cout << "❌ Erreur lors de la déconnexion." << endl;
+    }
+}
+
+template<typename T>
+T GetUserDetails( string email,  string role) {
+    T user;
+    string filename;
+    if (role == "resident") filename = "BD\\Resident.txt";
+    else filename = "BD\\personnel.txt";
+    ifstream f(filename);
+    if (!f.is_open()) {
+            cerr << "Erreur lors de l'ouverture de Resident.txt" << endl;
+            exit(-1);
+    }
+
+    /*DateNaissance d;
+    sscanf(date.c_str(), "%d/%d/%d", &d.jour, &d.mois, &d.anne);
+    user.setDateNaissance(d);*/
+
+}
+
+int main() {
+    afficherChargement("CenterX", 0);
+    system("cls");
+    system("color F0");
+    credentials TestConnect=CheckConnecter();
+    if(TestConnect.email!=""){
+             cout<<"Welcome"<<TestConnect.email;
+              int logout;
+              cout << "\n Voulez vous logout (1 = Oui, 0 = Non): "  << endl;
+              cin>>logout;
+              if (logout==1){
+                     LogoutUser();
+              }
+    }else{
+          string email, password;
+         int choix;
+
+        while (true) {
+            cout << "\n----- Bienvenue -----" << endl;
+            cout << "1. Se connecter" << endl;
+            cout << "2. S'inscrire comme Resident" << endl;
+            cout << "3. Quitter" << endl;
+            cout << "Choix: ";
+            cin >> choix;
+
+        if (choix == 1) {
+            cout << "\n--- Connexion ---" << endl;
+            cout << "Email: ";
+            cin >> email;
+            cout << "Mot de passe: ";
+            cin >> password;
+
+            string role = VerifierEmailPassword(email, password);
+            if (role != "") {
+                cout << "\n✅ Connexion réussie en tant que " << role << endl;
+                int checkRes;
+                cout << "\n Voulez vous rester connecté (1 = Oui, 0 = Non): "  << endl;
+                if (role== "resident") {
+                        Resident r = GetUserDetails<Resident>(email, role);
+                        cout << "Bienvenue " << r.getNom() << " !\n";
+                }
+                cin>>checkRes;
+                if (checkRes==1)
+                    resteConnecte(email,role);
+            } else {
+                cout << "\n❌ Compte introuvable. Souhaitez-vous vous inscrire ? (1 = Oui, 0 = Non): ";
+                int reponse;
+                cin >> reponse;
+                if (reponse == 1) {
+                    inscrireResident();
+                    afficherChargement("Loading", 1);
+                } else {
+                    cout << "🔙 Retour au menu principal.\n";
+                }
+            }
+
+        } else if (choix == 2) {
+            inscrireResident();
+        } else if (choix == 3) {
+            cout << "👋 Au revoir !" << endl;
+            break;
+        } else {
+            cout << "❌ Choix invalide. Veuillez réessayer.\n";
+        }
+        cout << "\nAppuyez sur Entrée pour continuer... ";
+        cin.ignore();
+        cin.get();
+        system("cls");
+    }
+}
+    return 0;
+}
 
  /*
     Batiment batiment("Centre", "Projet");

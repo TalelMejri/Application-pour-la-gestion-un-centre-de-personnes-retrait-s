@@ -1,33 +1,38 @@
 #ifndef MEDECIN_H_INCLUDED
 #define MEDECIN_H_INCLUDED
 
-#include "Personne.h"
+#include "Personnel.h"
 #include "Category.h"
-#include <vector>
+using namespace std;
 
-class Medecin : virtual public Personne {
-private:
-    double salaire;
+class Medecin : virtual public Personnel {
+protected:
     string specialite;
     vector<Category> categories;
-  //  set<Resident> residents;
 
 public:
     Medecin();
-    Medecin(int, string, string, string, string, string, string, DATE, double, string);
-    ~Medecin();
-
+    Medecin(int, string, string, string, string, string, string, DatePerso, string,double, string);
+  ~Medecin();
+    friend ostream& operator <<(ostream&, const Medecin&);
+    friend istream& operator >>(istream&, Medecin&);
+    friend ostream& operator <<(ostream&, const Medecin*);
+    friend istream& operator >>(istream&, Medecin*);
+    Medecin& operator=(const Medecin&);
+    Medecin(const Medecin&);
+    void ecrirerMedecinDansFichier();
     void afficherPersonne() ;
     void modifier() ;
 
     void ajouterCategory(Category);
+    void ModifierCategory(int);
+    void SupprimerCategory(int);
     void afficherCategories();
 
-    double getSalaire() { return salaire; }
+
     string getSpecialite() { return specialite; }
     vector<Category> getCategories() { return categories; }
 
-    void setSalaire(double salaireVal) { salaire = salaireVal; }
     void setSpecialite(string specialiteVal) { specialite = specialiteVal; }
 };
 

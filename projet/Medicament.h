@@ -21,9 +21,19 @@ public:
     Medicament();
     Medicament(int, string, int, DATE_Med);
     ~Medicament();
+    Medicament(const Medicament&);
+
+    Medicament& operator=(const Medicament&);
+
+    bool operator<(const Medicament&);
+
+    friend ostream& operator<<(ostream&, const Medicament&);
+    friend istream& operator>>(istream&, Medicament&);
+    friend ostream& operator<<(ostream&, const Medicament*);
+    friend istream& operator>>(istream&, Medicament*);
 
     void afficherMedicament();
-    bool estPerime(DATE_Med dateActuelle);
+    bool estPerime(DATE_Med dateActuelle) const;
 
     int getId() { return id; }
     string getNom() { return nom; }

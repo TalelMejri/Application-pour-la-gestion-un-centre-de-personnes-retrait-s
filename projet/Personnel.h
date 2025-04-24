@@ -10,11 +10,19 @@ protected:
 
 public:
     Personnel();
-    Personnel(int, string, string, string, string, string, string, DATE, string, double);
+    Personnel(int, string, string, string, string, string, string, DatePerso, string, double);
     virtual ~Personnel();
 
-    virtual void afficherPersonne() ;
-    virtual void modifier() ;
+    friend ostream& operator<<(ostream&, const Personnel&);
+    friend istream& operator>>(istream&, Personnel&);
+    friend ostream& operator<<(ostream&, const Personnel*);
+    friend istream& operator>>(istream&, Personnel*);
+    Personnel(const Personnel &);
+    Personnel& operator=(const Personnel&);
+    bool operator>(const Personnel&) const;
+
+    virtual void afficherPersonne();
+    virtual void modifier();
 
     string getPoste() { return poste; }
     double getSalaire() { return salaire; }

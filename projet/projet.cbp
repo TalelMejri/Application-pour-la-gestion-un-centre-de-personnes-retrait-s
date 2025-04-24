@@ -28,10 +28,6 @@
 				</Linker>
 			</Target>
 		</Build>
-		<Compiler>
-			<Add option="-Wall" />
-			<Add option="-fexceptions" />
-		</Compiler>
 		<Unit filename="Batiment.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
