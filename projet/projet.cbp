@@ -28,120 +28,45 @@
 				</Linker>
 			</Target>
 		</Build>
-		<Unit filename="Batiment.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="Batiment.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Category.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="Category.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Chambre.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="Chambre.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="ChambreMultiple.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="ChambreMultiple.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="ChambrePatient.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="ChambrePatient.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="ChambrePersonnel.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="ChambrePersonnel.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="DossierMedical.cpp">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="DossierMedical.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Etage.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="Etage.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="EtageAlzheimer.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="EtageAlzheimer.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="EtageCardio.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="EtageCardio.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="EtageNeurologie.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="EtageNeurologie.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Infirmier.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="Infirmier.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Medecin.cpp">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Medecin.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="MedecinInfirmier.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="MedecinInfirmier.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Medicament.cpp">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Medicament.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Personne.cpp">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Personne.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Personnel.cpp">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Personnel.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Resident.cpp">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Resident.h">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Responsable.cpp">
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="Responsable.h">
-			<Option target="Debug" />
-		</Unit>
+		<Unit filename="Batiment.cpp" />
+		<Unit filename="Batiment.h" />
+		<Unit filename="Category.cpp" />
+		<Unit filename="Category.h" />
+		<Unit filename="Chambre.cpp" />
+		<Unit filename="Chambre.h" />
+		<Unit filename="ChambreMultiple.cpp" />
+		<Unit filename="ChambreMultiple.h" />
+		<Unit filename="ChambrePatient.cpp" />
+		<Unit filename="ChambrePatient.h" />
+		<Unit filename="ChambrePersonnel.cpp" />
+		<Unit filename="ChambrePersonnel.h" />
+		<Unit filename="Date.h" />
+		<Unit filename="DossierMedical.cpp" />
+		<Unit filename="DossierMedical.h" />
+		<Unit filename="Etage.cpp" />
+		<Unit filename="Etage.h" />
+		<Unit filename="EtageAlzheimer.cpp" />
+		<Unit filename="EtageAlzheimer.h" />
+		<Unit filename="EtageCardio.cpp" />
+		<Unit filename="EtageCardio.h" />
+		<Unit filename="EtageNeurologie.cpp" />
+		<Unit filename="EtageNeurologie.h" />
+		<Unit filename="Infirmier.cpp" />
+		<Unit filename="Infirmier.h" />
+		<Unit filename="Medecin.cpp" />
+		<Unit filename="Medecin.h" />
+		<Unit filename="MedecinInfirmier.cpp" />
+		<Unit filename="MedecinInfirmier.h" />
+		<Unit filename="Medicament.cpp" />
+		<Unit filename="Medicament.h" />
+		<Unit filename="Personne.cpp" />
+		<Unit filename="Personne.h" />
+		<Unit filename="Personnel.cpp" />
+		<Unit filename="Personnel.h" />
+		<Unit filename="Resident.cpp" />
+		<Unit filename="Resident.h" />
+		<Unit filename="Responsable.cpp" />
+		<Unit filename="Responsable.h" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>

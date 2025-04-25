@@ -1,48 +1,54 @@
 #include "ChambrePersonnel.h"
+#include <iostream>
+using namespace std;
 
-    
-ChambrePersonnel::ChambrePersonnel(int id,int floor,bool estquiped ):Chambre(id,floor){
-    estequipee=estquiped;
-}
+ChambrePersonnel::ChambrePersonnel() : Chambre(), estequipee(false) {}
 
-ChambrePersonnel::ChambrePersonnel():Chambre(){}
+ChambrePersonnel::ChambrePersonnel(int id, int floor, bool estEquipee)
+    : Chambre(id, floor), estequipee(estEquipee) {}
 
-ChambrePersonnel::~ChambrePersonnel(){}
+ChambrePersonnel::~ChambrePersonnel() {}
 
-ChambrePersonnel::ChambrePersonnel(const ChambrePersonnel& a):Chambre(a){
-        this->estequipee = other.estequipee;
-}
+ChambrePersonnel::ChambrePersonnel(const ChambrePersonnel& other)
+    : Chambre(other), estequipee(other.estequipee) {}
 
-ChambrePersonnel::ChambrePersonnel& operator=(const ChambrePersonnel& other){
+ChambrePersonnel& ChambrePersonnel::operator=(const ChambrePersonnel& other) {
     if (this != &other) {
         Chambre::operator=(other);
-        this->estequipee = other.estequipee;
+        estequipee = other.estequipee;
     }
     return *this;
 }
 
-friend ostream& operator <<(ostream& out, const ChambrePersonnel& ChP){
-    out << static_cast<const Chambre&>(ChP);
-    out<<ChP.IsVisited<<" " ;
+ostream& operator<<(ostream& out, const ChambrePersonnel& ch) {
+    out << static_cast<const Chambre&>(ch);
+    out << ", Equipped: " << (ch.estequipee ? "Yes" : "No");
+    return out;
 }
-friend istream& operator >>(istream& in, ChambrePersonnel& ChP){
-    in >> static_cast<Chambre&>(ChP);
-    cout<<"Is it visited?; ";
-    in>>ChP.IsVisited;
+
+istream& operator>>(istream& in, ChambrePersonnel& ch) {
+    in >> static_cast<Chambre&>(ch);
+    cout << "Is it equipped (0 or 1)? ";
+    in >> ch.estequipee;
+    return in;
 }
-friend ostream& operator <<(ostream&, const ChambrePersonnel*){
-    out << static_cast<const Chambre*>(ChP);
-    out<<ChP->estequipee<<" " ;
-}
-friend istream& operator >>(istream&, ChambrePersonnel*){
-    in >> static_cast<Chambre*>(ChP);
-    cout<<"Is it visited?; ";
-    in>>ChP->estequipee;
+
+ostream& operator<<(ostream& out, const ChambrePersonnel* ch) {
+    if (ch) {
+        out << *ch;
     }
-
-
-void ChambrePersonnel::afficherChambrePersonnel(){
-    Chambre::afficherChambre();
-    cout<<estequipee;
+    return out;
 }
 
+istream& operator>>(istream& in, ChambrePersonnel* ch) {
+    if (ch) {
+        in >> *ch;
+    }
+    return in;
+}
+
+void ChambrePersonnel::afficherChambre() const {
+    cout << "Chambre Personnel - ";
+    afficherChambre();
+    cout << ", Equipped: " << (estequipee ? "Yes" : "No") << endl;
+}

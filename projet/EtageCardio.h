@@ -6,7 +6,7 @@
 class EtageCardio : public Etage {
     int nbr_chambre;
 public:
-    EtageCardio(int,int,string);
+    EtageCardio(int, int, string);
     EtageCardio();
     virtual ~EtageCardio();
     EtageCardio& operator=(const EtageCardio&);
@@ -17,8 +17,7 @@ public:
     friend ostream& operator <<(ostream&, const EtageCardio*);
     friend istream& operator >>(istream&, EtageCardio*);
 
-    void afficherEtageCardio() ;
-
+    void afficherEtage() override;
 };
 
 #endif // ETAGECARDIO_H_INCLUDED

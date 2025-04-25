@@ -17,6 +17,14 @@ public:
     Batiment(string, string);
     ~Batiment();
 
+    friend ostream& operator <<(ostream&, const Batiment&);
+    friend istream& operator >>(istream&, Batiment&);
+    friend ostream& operator <<(ostream&, const Batiment*);
+    friend istream& operator >>(istream&, Batiment*);
+
+    Batiment& operator=(const Batiment&);
+    Batiment(const Batiment&);
+
     void ajouterEtage(Etage* etage);
     void ajouterPersonne(Personne* personne);
     void afficherBatiment();

@@ -1,47 +1,37 @@
 #include "ChambrePatient.h"
 
-ChambrePatient::ChambrePatient(int id,int floor,bool Visited ):Chambre(id,floor){
-    IsVisited=Visited;
-}
+ChambrePatient::ChambrePatient() : Chambre(), IsVisited(false) {}
 
-ChambrePatient::ChambrePatient():Chambre(){}
+ChambrePatient::ChambrePatient(int id, int floor, bool visited)
+    : Chambre(id, floor), IsVisited(visited) {}
 
-ChambrePatient::~ChambrePatient(){}
+ChambrePatient::~ChambrePatient() {}
 
-ChambrePatient::ChambrePatient(const ChambrePatient& a):Chambre(a){
-        this->IsVisited = other.IsVisited;
-}
+ChambrePatient::ChambrePatient(const ChambrePatient& other)
+    : Chambre(other), IsVisited(other.IsVisited) {}
 
-ChambrePatient::ChambrePatient& operator=(const ChambrePatient& other){
+ChambrePatient& ChambrePatient::operator=(const ChambrePatient& other) {
     if (this != &other) {
         Chambre::operator=(other);
-        this->IsVisited = other.IsVisited;
+        IsVisited = other.IsVisited;
     }
     return *this;
 }
 
-friend ostream& operator <<(ostream& out, const ChambrePatient& ChP){
+ostream& operator<<(ostream& out, const ChambrePatient& ChP) {
     out << static_cast<const Chambre&>(ChP);
-    out<<ChP.IsVisited<<" " ;
+    out << ", Visited: " << (ChP.IsVisited ? "Yes" : "No");
+    return out;
 }
-friend istream& operator >>(istream& in, ChambrePatient& ChP){
+
+istream& operator>>(istream& in, ChambrePatient& ChP) {
     in >> static_cast<Chambre&>(ChP);
-    cout<<"Is it visited?; ";
-    in>>ChP.IsVisited;
-}
-friend ostream& operator <<(ostream&, const ChambrePatient*){
-    out << static_cast<const Chambre*>(ChP);
-    out<<ChP->IsVisited<<" " ;
+    cout << "Is visited (0 or 1)? ";
+    in >> ChP.IsVisited;
+    return in;
 }
 
-friend istream& operator >>(istream&, ChambrePatient*){
-    in >> static_cast<Chambre*>(ChP);
-    cout<<"Is it visited?; ";
-    in>>ChP->IsVisited;
-    }
-
-void ChambrePatient::afficherChambrePatient(){
-    Chambre::afficherChambre();
-    cout<<IsVisited;
+void ChambrePatient::afficherChambre() const {
+    afficherChambre();
+    cout << ", Visited: " << (IsVisited ? "Yes" : "No") << endl;
 }
-

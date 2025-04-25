@@ -2,6 +2,7 @@
 #define CHAMBRE_H_INCLUDED
 
 #include <iostream>
+using namespace std;
 
 class Chambre {
 protected:
@@ -12,22 +13,19 @@ public:
     Chambre();
     Chambre(int, int);
     virtual ~Chambre() {}
+    Chambre(const Chambre&);
     Chambre& operator=(const Chambre&);
 
-    friend ostream& operator <<(ostream&, const Chambre&);
-    friend istream& operator >>(istream&, Chambre&);
-    friend ostream& operator <<(ostream&, const Chambre*);
-    friend istream& operator >>(istream&, Chambre*);
+    friend ostream& operator<<(ostream&, const Chambre&);
+    friend istream& operator>>(istream&, Chambre&);
 
-    Chambre(const Chambre&);
+    virtual void afficherChambre() const = 0;
 
-    virtual void afficherChambre() = 0;
-
-    int getId() { return id; }
-    int getfloorNumber() { return floorNumber; }
+    int getId() const { return id; }
+    int getFloorNumber() const { return floorNumber; }
 
     void setId(int idVal) { id = idVal; }
-    void setfloorNumber(int floor){floorNumber=floor;}
+    void setFloorNumber(int floor) { floorNumber = floor; }
 };
 
 #endif // CHAMBRE_H_INCLUDED

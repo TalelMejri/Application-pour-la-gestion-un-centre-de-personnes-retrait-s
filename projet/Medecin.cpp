@@ -16,7 +16,7 @@ Medecin::Medecin(const Medecin& other)
 
 Medecin& Medecin::operator=(const Medecin& other) {
     if (this != &other) {
-        Personne::operator=(other);
+        Personnel::operator=(other);
         specialite = other.specialite;
         categories = other.categories;
     }

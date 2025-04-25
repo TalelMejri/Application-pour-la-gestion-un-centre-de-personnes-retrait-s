@@ -3,26 +3,23 @@
 
 #include "Chambre.h"
 
-class ChambrePatient : public Chambre {
+class ChambrePatient : public virtual Chambre {
     bool IsVisited;
+
 public:
     ChambrePatient();
-    ChambrePatient(int, int);
+    ChambrePatient(int, int, bool);
     virtual ~ChambrePatient();
+    ChambrePatient(const ChambrePatient&);
     ChambrePatient& operator=(const ChambrePatient&);
 
-    friend ostream& operator <<(ostream&, const ChambrePatient&);
-    friend istream& operator >>(istream&, ChambrePatient&);
-    friend ostream& operator <<(ostream&, const ChambrePatient*);
-    friend istream& operator >>(istream&, ChambrePatient*);
+    friend ostream& operator<<(ostream&, const ChambrePatient&);
+    friend istream& operator>>(istream&, ChambrePatient&);
 
-    ChambrePatient(const ChambrePatient&);
+    void afficherChambre() const override;
 
-    void afficherChambrePatient();
-
-    bool getIsVisited() { return IsVisited; }
-
-    void setIsVisited() { IsVisited!=IsVisited}
+    bool getIsVisited() const { return IsVisited; }
+    void toggleIsVisited() { IsVisited = !IsVisited; }
 };
 
 #endif // CHAMBREPATIENT_H_INCLUDED

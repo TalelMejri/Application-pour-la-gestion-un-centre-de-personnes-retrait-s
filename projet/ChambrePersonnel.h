@@ -3,26 +3,25 @@
 
 #include "Chambre.h"
 
-class ChambrePersonnel : public Chambre {
+class ChambrePersonnel : public virtual Chambre {
     bool estequipee;
+
 public:
-ChambrePersonnel();
-ChambrePersonnel(int, int);
-virtual ~ChambrePersonnel();
-ChambrePersonnel& operator=(const ChambrePersonnel&);
+    ChambrePersonnel();
+    ChambrePersonnel(int, int, bool);
+    virtual ~ChambrePersonnel();
+    ChambrePersonnel(const ChambrePersonnel&);
+    ChambrePersonnel& operator=(const ChambrePersonnel&);
 
-friend ostream& operator <<(ostream&, const ChambrePersonnel&);
-friend istream& operator >>(istream&, ChambrePersonnel&);
-friend ostream& operator <<(ostream&, const ChambrePersonnel*);
-friend istream& operator >>(istream&, ChambrePersonnel*);
+    friend ostream& operator<<(ostream&, const ChambrePersonnel&);
+    friend istream& operator>>(istream&, ChambrePersonnel&);
+    friend ostream& operator<<(ostream&, const ChambrePersonnel*);
+    friend istream& operator>>(istream&, ChambrePersonnel*);
 
-ChambrePersonnel(const ChambrePersonnel&);
+    void afficherChambre() const override;
 
-void afficherChambrePersonnel();
-
-bool getEquiped() { return estequipee; }
-
-void setEquiped() { estequipee!=estequipee}
+    bool getEquiped() const { return estequipee; }
+    void toggleEquiped() { estequipee = !estequipee; }
 };
 
 #endif // CHAMBREPERSONNEL_H_INCLUDED

@@ -6,7 +6,7 @@
 class EtageAlzheimer : public Etage {
     int nbr_chambre;
 public:
-    EtageAlzheimer(int,int,string);
+    EtageAlzheimer(int, int, string);
     EtageAlzheimer();
     virtual ~EtageAlzheimer();
     EtageAlzheimer& operator=(const EtageAlzheimer&);
@@ -17,8 +17,7 @@ public:
     friend ostream& operator <<(ostream&, const EtageAlzheimer*);
     friend istream& operator >>(istream&, EtageAlzheimer*);
 
-    void afficherEtageAlzheimer() ;
-
+    void afficherEtage() override;
 };
 
 #endif // ETAGEALZHEIMER_H_INCLUDED

@@ -1,18 +1,20 @@
 #include "EtageCardio.h"
+#include <iostream>
+using namespace std;
 
-EtageCardio::EtageCardio(int id,int nbr,string type):Etage(id,type){
-    nbr_chambre=nbr;
+EtageCardio::EtageCardio(int id, int nbr, string type) : Etage(id, type) {
+    nbr_chambre = nbr;
 }
 
-EtageCardio::EtageCardio():Etage(){}
+EtageCardio::EtageCardio() : Etage() {}
 
-EtageCardio::~EtageCardio(){}
+EtageCardio::~EtageCardio() {}
 
-EtageCardio::EtageCardio(const EtageCardio& a): Etage(a) {
-     nbr_chambre=a.nbr_chambre;
+EtageCardio::EtageCardio(const EtageCardio& a) : Etage(a) {
+    nbr_chambre = a.nbr_chambre;
 }
 
-EtageCardio& operator=(const EtageCardio&){
+EtageCardio& EtageCardio::operator=(const EtageCardio& other) {
     if (this != &other) {
         Etage::operator=(other);
         this->nbr_chambre = other.nbr_chambre;
@@ -20,40 +22,35 @@ EtageCardio& operator=(const EtageCardio&){
     return *this;
 }
 
-
- ostream& operator <<(ostream& os , const EtageCardio& etageAlz);{
-    out << static_cast<const Etage&>(etageAlz);
-    out << etageAlz.nbr_chambre <<" ";
+ostream& operator <<(ostream& os, const EtageCardio& etageCardio) {
+    os << static_cast<const Etage&>(etageCardio);  // Appel du flux pour la classe de base
+    os << " Nombre de chambres: " << etageCardio.nbr_chambre << " ";
+    return os;
 }
 
-
- ostream& operator <<(ostream& os , const EtageCardio* etageAlz);{
-    out << static_cast<const Etage*>(etageAlz);
-    out << etageAlz->nbr_chambre <<" ";
+ostream& operator <<(ostream& os, const EtageCardio* etageCardio) {
+    os << static_cast<const Etage*>(etageCardio);  // Appel du flux pour la classe de base
+    os << " Nombre de chambres: " << etageCardio->nbr_chambre << " ";
+    return os;
 }
 
-istream& operator>>(istream& in, EtageCardio& etageAlz) {
-    in >> static_cast<EtageCardio&>(etageAlz);
-    cout << "Entrez le nombre de chambres ";
-    in >> etageAlz.nbr_chambre;
+istream& operator>>(istream& in, EtageCardio& etageCardio) {
+    in >> static_cast<Etage&>(etageCardio);  // Appel de l'opérateur >> pour la classe de base
+    cout << "Entrez le nombre de chambres: ";
+    in >> etageCardio.nbr_chambre;
     return in;
 }
 
-istream& operator>>(istream& in, EtageCardio* etageAlz) {
-    in >> static_cast<EtageCardio*>(etageAlz);
-    cout << "Entrez le nombre de chambres ";
-    in >> etageAlz->nbr_chambre;
+istream& operator>>(istream& in, EtageCardio* etageCardio) {
+    in >> static_cast<Etage*>(etageCardio);  // Appel de l'opérateur >> pour la classe de base
+    cout << "Entrez le nombre de chambres: ";
+    in >> etageCardio->nbr_chambre;
     return in;
 }
 
-
-void EtageCardio::afficherEtage(){
-      cout << "Etage Alzheimer - ID: " << Etage::getId() << endl;
-        for (auto chambre : chambres) {
-            chambre->afficherChambre();
-        }
+void EtageCardio::afficherEtage() {
+    cout << "Etage Cardio - ID: " << Etage::getId() << endl;
+    for (auto chambre : chambres) {
+        chambre->afficherChambre();
+    }
 }
-
-
-
-

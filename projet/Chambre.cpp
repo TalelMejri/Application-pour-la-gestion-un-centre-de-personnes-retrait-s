@@ -1,40 +1,31 @@
 #include "Chambre.h"
-#include <iostream>
-using namespace std;
 
-Chambre::Chambre(int idVal,int floor) {
-    id=idVal;
-    floorNumber=floor;
-}
+Chambre::Chambre() : id(0), floorNumber(0) {}
 
-friend ostream& operator <<(ostream& os , const Chambre& chambre);{
-    os<<" "<<chambre.id;
-    os<<" "<<chambre.floorNumber;
-}
+Chambre::Chambre(int idVal, int floor) : id(idVal), floorNumber(floor) {}
 
-friend ostream& operator <<(ostream& os , const Chambre* chambre);{
-    os<<" "<<chambre->id;
-    os<<" "<<chambre->floorNumber;
-}
-
- istream& operator >>(istream& is , const Chambre& chambre);{
-    cout<<"  ";
-    is>>chambre.id;
-    cout<<" ";
-    is>>chambre.floorNumber;
-}
-
-friend istream& operator >>(istream& is , const Chambre* chambre);{
-    cout<<" ";
-    is>>chambre->id;
-    cout<<" ";
-    is>>chambre->floorNumber;
+Chambre::Chambre(const Chambre& other) {
+    id = other.id;
+    floorNumber = other.floorNumber;
 }
 
 Chambre& Chambre::operator=(const Chambre& ch) {
     if (this != &ch) {
-        this->id = ch.id;
-        this->nom = ch.nom;
+        id = ch.id;
+        floorNumber = ch.floorNumber;
     }
     return *this;
+}
+
+ostream& operator<<(ostream& os, const Chambre& chambre) {
+    os << "ID: " << chambre.id << ", Floor: " << chambre.floorNumber;
+    return os;
+}
+
+istream& operator>>(istream& is, Chambre& chambre) {
+    cout << "Enter ID: ";
+    is >> chambre.id;
+    cout << "Enter floor number: ";
+    is >> chambre.floorNumber;
+    return is;
 }

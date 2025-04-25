@@ -23,6 +23,7 @@ Personnel::Personnel(const Personnel & a): Personne(a){
 
 Personnel& Personnel::operator=(const Personnel& p) {
     if (this != &p) {
+
         Personne::operator=(p);
         poste = p.poste;
         salaire = p.salaire;
