@@ -23,27 +23,27 @@ EtageNeurologie& EtageNeurologie::operator=(const EtageNeurologie& other) {
 }
 
 ostream& operator <<(ostream& os, const EtageNeurologie& etageNeurologie) {
-    os << static_cast<const Etage&>(etageNeurologie);  // Appel du flux pour la classe de base
-    os << " Nombre de chambres: " << etageNeurologie.nbr_chambre << " ";
+    os << static_cast<const Etage&>(etageNeurologie);
+    os << " " << etageNeurologie.nbr_chambre << " ";
     return os;
 }
 
 ostream& operator <<(ostream& os, const EtageNeurologie* etageNeurologie) {
-    os << static_cast<const Etage*>(etageNeurologie);  // Appel du flux pour la classe de base
-    os << " Nombre de chambres: " << etageNeurologie->nbr_chambre << " ";
+    os << static_cast<const Etage*>(etageNeurologie);
+    os << " " << etageNeurologie->nbr_chambre << " ";
     return os;
 }
 
 istream& operator>>(istream& in, EtageNeurologie& etageNeurologie) {
-    in >> static_cast<Etage&>(etageNeurologie);  // Appel de l'opérateur >> pour la classe de base
-    cout << "Entrez le nombre de chambres: ";
+    in >> static_cast<Etage&>(etageNeurologie);
+    cout << " ";
     in >> etageNeurologie.nbr_chambre;
     return in;
 }
 
 istream& operator>>(istream& in, EtageNeurologie* etageNeurologie) {
-    in >> static_cast<Etage*>(etageNeurologie);  // Appel de l'opérateur >> pour la classe de base
-    cout << "Entrez le nombre de chambres: ";
+    in >> static_cast<Etage*>(etageNeurologie);
+    cout << " ";
     in >> etageNeurologie->nbr_chambre;
     return in;
 }

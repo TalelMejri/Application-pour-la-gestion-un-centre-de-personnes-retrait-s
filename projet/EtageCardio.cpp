@@ -23,26 +23,26 @@ EtageCardio& EtageCardio::operator=(const EtageCardio& other) {
 }
 
 ostream& operator <<(ostream& os, const EtageCardio& etageCardio) {
-    os << static_cast<const Etage&>(etageCardio);  // Appel du flux pour la classe de base
+    os << static_cast<const Etage&>(etageCardio);
     os << " Nombre de chambres: " << etageCardio.nbr_chambre << " ";
     return os;
 }
 
 ostream& operator <<(ostream& os, const EtageCardio* etageCardio) {
-    os << static_cast<const Etage*>(etageCardio);  // Appel du flux pour la classe de base
+    os << static_cast<const Etage*>(etageCardio);
     os << " Nombre de chambres: " << etageCardio->nbr_chambre << " ";
     return os;
 }
 
 istream& operator>>(istream& in, EtageCardio& etageCardio) {
-    in >> static_cast<Etage&>(etageCardio);  // Appel de l'opérateur >> pour la classe de base
+    in >> static_cast<Etage&>(etageCardio);
     cout << "Entrez le nombre de chambres: ";
     in >> etageCardio.nbr_chambre;
     return in;
 }
 
 istream& operator>>(istream& in, EtageCardio* etageCardio) {
-    in >> static_cast<Etage*>(etageCardio);  // Appel de l'opérateur >> pour la classe de base
+    in >> static_cast<Etage*>(etageCardio);
     cout << "Entrez le nombre de chambres: ";
     in >> etageCardio->nbr_chambre;
     return in;

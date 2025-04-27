@@ -28,9 +28,11 @@ public:
     void ajouterEtage(Etage* etage);
     void ajouterPersonne(Personne* personne);
     void afficherBatiment();
+    void afficherEtage();
     void supprimerEtage(int id);
     void supprimerPersonne(int id);
-
+    void enregistrerEtages();
+    void chargerEtages() ;
     string getNom() { return nom; }
     string getAdresse() { return adresse; }
     vector<Etage*> getEtages() { return etages; }

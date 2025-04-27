@@ -26,6 +26,7 @@ public:
     void SupprimerChambre(int id);
     void AfficherChambre();
     virtual void afficherEtage() = 0;
+    Etage* chargerEtageDepuisFichier(ifstream& );
 
     int getId() { return id; }
     string getType() { return type; }

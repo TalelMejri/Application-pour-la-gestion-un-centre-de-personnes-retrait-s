@@ -21,7 +21,7 @@ void Etage::ajouterChambre(Chambre* chambre) {
 }
 
 ostream& operator<<(ostream& os, const Etage& etage) {
-    os << "Etage ID: " << etage.id << ", Type: " << etage.type;
+    os << " " << etage.id << " " << etage.type;
     for (auto chambre : etage.chambres) {
         os << "\n  " << *chambre;
     }
@@ -34,9 +34,9 @@ ostream& operator<<(ostream& os, const Etage* etage) {
 }
 
 istream& operator>>(istream& is, Etage& etage) {
-    cout << "Enter Etage ID: ";
+    cout << " ";
     is >> etage.id;
-    cout << "Enter Etage Type: ";
+    cout << " ";
     is >> etage.type;
 
    int n;
@@ -98,7 +98,7 @@ Etage& Etage::operator=(const Etage& A) {
         }
         chambres.clear();
 
- id = A.id;
+    id = A.id;
     type = A.type;
     Chambre* p;
     for (unsigned int i = 0; i < A.chambres.size(); i++) {
@@ -114,3 +114,5 @@ Etage& Etage::operator=(const Etage& A) {
     }
     return *this;
 }
+
+

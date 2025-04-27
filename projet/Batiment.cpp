@@ -3,6 +3,7 @@
 #include "EtageAlzheimer.h"
 #include "EtageCardio.h"
 #include "EtageNeurologie.h"
+#include <fstream>
 
 using namespace std;
 
@@ -155,4 +156,52 @@ istream& operator >>(istream& in, Batiment* batiment) {
     cout << "Entrez l'adresse du batiment: ";
     in >> batiment->adresse;
     return in;
+}
+
+void Batiment::enregistrerEtages() {
+        ofstream of("BD\\Etage.txt", ios::app);
+        for (auto e : etages) {
+            if (dynamic_cast<EtageAlzheimer*>(e)) {
+                of << "EtageAlzheimer" << " ";
+                of << *e;
+            }
+        }
+}
+
+void Batiment::afficherEtage() {
+    if (etages.empty()) {
+        cout << "Aucun étage enregistré dans le bâtiment." << endl;
+    } else {
+        cout << "===== Liste des étages du bâtiment =====" << endl;
+        for (auto etage : etages) {
+            if (etage != nullptr)
+                etage->afficherEtage();
+        }
+        cout << "========================================" << endl;
+    }
+}
+
+
+
+Etage* chargerEtageDepuisFichier(ifstream& in) {
+    string type;
+    in >> type;
+
+    if (type == "EtageAlzheimer") {
+        EtageAlzheimer* etage = new EtageAlzheimer();
+        in >> etage;
+        return etage;
+    }
+
+    return nullptr;
+}
+
+ void Batiment::chargerEtages() {
+        ifstream in("BD\\Etage.txt");
+        while (!in.eof()) {
+            Etage* e = chargerEtageDepuisFichier(in);
+            if (e != nullptr)
+                etages.push_back(e);
+        }
+        in.close();
 }

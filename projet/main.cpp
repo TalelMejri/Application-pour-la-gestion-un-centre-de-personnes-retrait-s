@@ -11,6 +11,7 @@
 #include "Infirmier.h"
 #include "MedecinInfirmier.h"
 #include "Responsable.h"
+#include "EtageAlzheimer.h"
 
 using namespace std;
 
@@ -57,6 +58,21 @@ void resteConnecte(string email,string role){
 void inscrireResident() {
     string nom, prenom, cinn, email, password, telf;
     cout << "------ Inscription Resident ------" << endl;
+    Batiment bat;
+
+    EtageAlzheimer* e1 = new EtageAlzheimer(1, 5, "Alzheimer");
+    bat.ajouterEtage(e1);
+
+    bat.enregistrerEtages();
+
+    Batiment bat2;
+    bat2.chargerEtages();
+
+    bat2.afficherEtage();
+    /*Etage* etage;
+    bat.ajouterEtage(etage);
+    bat.afficherEtage();*/
+
       /* Resident res;
     cin>>res;
     res.ecrirerResidentDansFichier();

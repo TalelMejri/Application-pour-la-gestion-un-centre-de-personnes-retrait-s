@@ -1,5 +1,7 @@
 #include "EtageAlzheimer.h"
 #include <iostream>
+#include <fstream>
+
 using namespace std;
 
 EtageAlzheimer::EtageAlzheimer(int id, int nbr, string type) : Etage(id, type) {
@@ -24,13 +26,13 @@ EtageAlzheimer& EtageAlzheimer::operator=(const EtageAlzheimer& other) {
 
 ostream& operator <<(ostream& os, const EtageAlzheimer& etageAlz) {
     os << static_cast<const Etage&>(etageAlz);
-    os << " Nombre de chambres: " << etageAlz.nbr_chambre << " ";
+    os << "  " << etageAlz.nbr_chambre << " ";
     return os;
 }
 
 ostream& operator <<(ostream& os, const EtageAlzheimer* etageAlz) {
     os << static_cast<const Etage*>(etageAlz);
-    os << " Nombre de chambres: " << etageAlz->nbr_chambre << " ";
+    os << "  " << etageAlz->nbr_chambre << " ";
     return os;
 }
 
@@ -52,6 +54,17 @@ void EtageAlzheimer::afficherEtage() {
     cout << "Etage Alzheimer - ID: " << Etage::getId() << endl;
     for (auto chambre : chambres) {
         chambre->afficherChambre();
+    }
+}
+
+void EtageAlzheimer::ecrirerEtageAlzheimerDansFichier(){
+    try{
+            ofstream of("BD\\Etage.txt", ios::app);
+            of<<"EtageAlzheimer"<<" ";
+            of<<this;
+            of.close();
+    }catch(exception e){
+        cerr<<"Erreur"<<e.what();
     }
 }
 
