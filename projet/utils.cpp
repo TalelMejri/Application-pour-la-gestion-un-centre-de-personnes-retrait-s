@@ -49,9 +49,9 @@ void Connexion(credentials& connectedUser, credentials& c) {
 
             string role = c.VerifierEmailPassword(email, password);
             if (role != "") {
-                cout << "\nConnexion réussie en tant que " << role << endl;
+                cout << "\nConnexion reussie en tant que  " << role << endl;
                 int checkRes;
-                cout << "\nVoulez-vous rester connecté ? (1 = Oui, 0 = Non): ";
+                cout << "\nVoulez-vous rester connecte ? (1 = Oui, 0 = Non): ";
                 cin >> checkRes;
                 if (checkRes == 1) resteConnecte(email, role);
                 connectedUser.email = email;
@@ -110,11 +110,30 @@ void MenuResponsable(Responsable& responsable) {
 
         switch (choix) {
             case 1: {
-                Personnel* emp = new Personnel();
-                cin >> *emp;
-                responsable.ajouterEmploye(emp);
-                cout << "Employe ajoute avec succes.\n";
-                break;
+                int typePersonnel;
+    cout << "Quel type d'employe voulez-vous ajouter ?" << endl;
+    cout << "1. Personnel\n2. Medecin\n3. MedecinInfirmier\nVotre choix : ";
+    cin >> typePersonnel;
+
+    Personnel* emp = nullptr;
+
+    if (typePersonnel == 1) {
+        emp = new Personnel();
+        cin >> *emp;
+    } else if (typePersonnel == 2) {
+        emp = new Medecin();
+        cin >> *(dynamic_cast<Medecin*>(emp));
+    } else if (typePersonnel == 3) {
+        emp = new MedecinInfirmier();
+        cin >> *(dynamic_cast<MedecinInfirmier*>(emp));
+    } else {
+        cout << "Type d'employe invalide. Operation annulee.\n";
+        break;
+    }
+
+    responsable.ajouterEmploye(emp);
+    cout << "Employe ajoute avec succes.\n";
+    break;
             }
             case 2: {
                 int id;

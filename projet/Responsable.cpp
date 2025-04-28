@@ -1,9 +1,4 @@
-#include "Responsable.h"
-#include "Infirmier.h"
-#include "Medecin.h"
-#include <iostream>
-#include "Resident.h"
-#include <fstream>
+#include "env.h"
 using namespace std;
 
 Responsable::Responsable() : Personne() {
@@ -114,9 +109,27 @@ istream& operator>>(istream& is, Responsable* r) {
 }
 
 void Responsable::ajouterEmploye(Personnel* employe) {
-    employes.push_back(employe);
-    cout << "Employé ajouté avec succès.\n";
+    credentials c;
+    if (typeid(*employe) == typeid(Medecin)) {
+        employes.push_back(employe);
+        c.SaveCredentials(employe->getEmail(), employe->getPassword(), "Medecin");
+        Medecin* medecin = dynamic_cast<Medecin*>(employe);
+        medecin->ecrirerMedecinDansFichier();
+        cout << "Medecin ajoute avec succes.\n";
+    }
+    else if (typeid(*employe) == typeid(MedecinInfirmier)) {
+        employes.push_back(employe);
+        c.SaveCredentials(employe->getEmail(), employe->getPassword(), "MedecinInfirmier");
+        MedecinInfirmier* medecinInf = dynamic_cast<MedecinInfirmier*>(employe);
+        medecinInf->ecrirerMedecinInfDansFichier();
+        cout << "Médecin-infirmier ajoute avec succes.\n";
+    }
+    else {
+        cout << "Erreur : Seuls les médecins ou medecins-infirmiers peuvent être ajoutes.\n";
+        delete employe;
+    }
 }
+
 
 void Responsable::supprimerEmploye(int id) {
     for (size_t i = 0; i < employes.size(); ++i) {
@@ -130,13 +143,13 @@ void Responsable::supprimerEmploye(int id) {
     cout << "Aucun employé avec cet ID.\n";
 }
 
-
 void Responsable::afficherEmployes() {
     if (employes.empty()) {
-        cout << "Aucun employé enregistré.\n";
+        cout << "Aucun employe enregistre.\n";
         return;
     }
-    cout << "Liste des employés :\n";
+    cout << "Liste des employes :\n";
+    cout<<employes.size();
     for (Personnel* p : employes) {
         cout << *p << endl;
     }

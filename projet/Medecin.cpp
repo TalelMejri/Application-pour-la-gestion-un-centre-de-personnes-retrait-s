@@ -79,9 +79,9 @@ ostream& operator<<(ostream& os, const Medecin& m) {
     os << static_cast<const Personnel&>(m);
     os << " "<< m.specialite << endl;
 
-    for (const Category& c : m.categories) {
+   /* for (const Category& c : m.categories) {
         os << c;
-    }
+    } */
 
     return os;
 }
@@ -91,7 +91,7 @@ istream& operator>>(istream& is, Medecin& m) {
     cout << "Entrer spécialité: ";
     is >> m.specialite;
 
-    char choix = 'o';
+    /*char choix = 'o';
     while (choix == 'o' || choix == 'O') {
         Category c;
         cout << "Ajouter une catégorie ? (o/n): ";
@@ -100,7 +100,7 @@ istream& operator>>(istream& is, Medecin& m) {
             is >> c;
             m.ajouterCategory(c);
         }
-    }
+    }*/
 
     return is;
 }
@@ -114,7 +114,7 @@ istream& operator>>(istream& is, Medecin* m) {
     cout << "Entrer spécialité: ";
     is >> m->specialite;
 
-    char choix = 'o';
+    /*char choix = 'o';
     while (choix == 'o' || choix == 'O') {
         Category c;
         cout << "Ajouter une catégorie ? (o/n): ";
@@ -123,7 +123,7 @@ istream& operator>>(istream& is, Medecin* m) {
             is >> c;
             m->ajouterCategory(c);
         }
-    }
+    }*/
 
     return is;
 }
