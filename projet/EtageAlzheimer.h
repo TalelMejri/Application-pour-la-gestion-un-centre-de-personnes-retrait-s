@@ -11,7 +11,6 @@ public:
     virtual ~EtageAlzheimer();
     EtageAlzheimer& operator=(const EtageAlzheimer&);
     EtageAlzheimer(const EtageAlzheimer&);
-    void ecrirerEtageAlzheimerDansFichier();
     friend ostream& operator <<(ostream&, const EtageAlzheimer&);
     friend istream& operator >>(istream&, EtageAlzheimer&);
     friend ostream& operator <<(ostream&, const EtageAlzheimer*);

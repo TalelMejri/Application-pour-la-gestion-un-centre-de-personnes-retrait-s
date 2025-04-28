@@ -42,10 +42,10 @@ Personne::Personne(const Personne& p) {
 void Personne::afficherPersonne() {
     cout << "ID: " << id << endl;
     cout << "Nom: " << nom << endl;
-    cout << "Prénom: " << prenom << endl;
+    cout << "Prenom: " << prenom << endl;
     cout << "CIN: " << cinn << endl;
     cout << "Email: " << email << endl;
-    cout << "Téléphone: " << tlf << endl;
+    cout << "Telephone: " << tlf << endl;
     cout << "Date de naissance: " << date_naissance.jour << "/" << date_naissance.mois << "/" << date_naissance.anne << endl;
 }
 
@@ -59,7 +59,7 @@ void Personne::saisir_personne() {
             cin >> nom;
             if (nom.empty()) throw invalid_argument("Le nom ne peut pas etre vide.");
 
-            cout << "Entrez le prénom : ";
+            cout << "Entrez le prenom : ";
             cin >> prenom;
             if (prenom.empty()) throw invalid_argument("Le prenom ne peut pas etre vide.");
 
@@ -75,10 +75,10 @@ void Personne::saisir_personne() {
             cout << "Entrez le mot de passe : ";
             cin >> password;
 
-            cout << "Entrez le téléphone : ";
+            cout << "Entrez le telephone : ";
             cin >> tlf;
 
-            cout << "Entrez la date de naissance (jour mois année) : ";
+            cout << "Entrez la date de naissance (jour mois annee) : ";
             cin >> date_naissance.jour >> date_naissance.mois >> date_naissance.anne;
 
             break;
@@ -86,7 +86,7 @@ void Personne::saisir_personne() {
         catch (const invalid_argument& e) {
             system("color 0C");
             cerr << "Erreur : " << e.what() << endl;
-            cout << "Veuillez réessayer." << endl;
+            cout << "Veuillez reessayer." << endl;
             std::this_thread::sleep_for(std::chrono::seconds(1));
             system("color F0");
         }
@@ -129,11 +129,11 @@ istream& operator>>(istream& in, Personne& p)
             if (!isConsole)  in >> p.id;
             if (isConsole) cout << "Entrez le nom : ";
             in >> p.nom;
-            if (isConsole) if (p.nom.empty()) throw invalid_argument("Le nom ne peut pas être vide.");
+            if (isConsole) if (p.nom.empty()) throw invalid_argument("Le nom ne peut pas etre vide.");
 
-            if (isConsole) cout << "Entrez le prénom : ";
+            if (isConsole) cout << "Entrez le prenom : ";
             in >> p.prenom;
-             if (isConsole) if (p.prenom.empty()) throw invalid_argument("Le prénom ne peut pas être vide.");
+             if (isConsole) if (p.prenom.empty()) throw invalid_argument("Le prenom ne peut pas etre vide.");
 
             if (isConsole)  cout << "Entrez le CIN : ";
             in >> p.cinn;
@@ -141,20 +141,20 @@ istream& operator>>(istream& in, Personne& p)
                 throw invalid_argument("Le CIN doit contenir exactement 8 chiffres.");
             }
 
-           if (isConsole)  cout << "Entrez l'email : ";
+           if (isConsole)  cout << "Entrez l email : ";
             in >> p.email;
 
 
            if (isConsole) cout << "Entrez le mot de passe : ";
             in >> p.password;
 
-        if (isConsole)   cout << "Entrez le téléphone : ";
+        if (isConsole)   cout << "Entrez le telephone : ";
             in >> p.tlf;
           if (isConsole)  if (p.tlf.length() != 8 ) {
-                throw invalid_argument("Le numéro de téléphone doit contenir 8 chiffres.");
+                throw invalid_argument("Le numero de telephone doit contenir 8 chiffres.");
             }
 
-          if (isConsole) cout << "Entrez la date de naissance (jour mois année) : ";
+          if (isConsole) cout << "Entrez la date de naissance (jour mois annee) : ";
           if(isConsole){
                in >> p.date_naissance.jour >> p.date_naissance.mois >> p.date_naissance.anne;
           }else{
@@ -167,7 +167,7 @@ istream& operator>>(istream& in, Personne& p)
         catch (const invalid_argument& e) {
             system("color 0C");
             cerr << "Erreur : " << e.what() << endl;
-            cout << "Veuillez réessayer.\n" << endl;
+            cout << "Veuillez reessayer.\n" << endl;
             std::this_thread::sleep_for(std::chrono::seconds(2));
             system("color F0");
         }
@@ -184,11 +184,11 @@ istream& operator>>(istream& in, Personne* p)
             in>>p->id;
             cout << "Entrez le nom : ";
             in >> p->nom;
-            if (p->nom.empty()) throw invalid_argument("Le nom ne peut pas être vide.");
+            if (p->nom.empty()) throw invalid_argument("Le nom ne peut pas etre vide.");
 
-            cout << "Entrez le prénom : ";
+            cout << "Entrez le prenom : ";
             in >> p->prenom;
-            if (p->prenom.empty()) throw invalid_argument("Le prénom ne peut pas être vide.");
+            if (p->prenom.empty()) throw invalid_argument("Le prénom ne peut pas etre vide.");
 
             cout << "Entrez le CIN : ";
             in >> p->cinn;
@@ -196,7 +196,7 @@ istream& operator>>(istream& in, Personne* p)
                 throw invalid_argument("Le CIN doit contenir exactement 8 chiffres.");
             }
 
-            cout << "Entrez l'email : ";
+            cout << "Entrez lemail : ";
             in >> p->email;
             /*if (p.email.find('@') == string::npos || p.email.find('.') == string::npos) {
                 throw invalid_argument("Email invalide.");
@@ -205,20 +205,20 @@ istream& operator>>(istream& in, Personne* p)
             cout << "Entrez le mot de passe : ";
             in >> p->password;
 
-            cout << "Entrez le téléphone : ";
+            cout << "Entrez le telephone : ";
             in >> p->tlf;
             if (p->tlf.length() != 8 ) {
-                throw invalid_argument("Le numéro de téléphone doit contenir 8 chiffres.");
+                throw invalid_argument("Le numero de telephone doit contenir 8 chiffres.");
             }
 
-            cout << "Entrez la date de naissance (jour mois année) : ";
+            cout << "Entrez la date de naissance (jour mois annee) : ";
             in >> p->date_naissance.jour >> p->date_naissance.mois >> p->date_naissance.anne;
             break;
         }
         catch (const invalid_argument& e) {
             system("color 0C");
             cerr << "Erreur : " << e.what() << endl;
-            cout << "Veuillez réessayer.\n" << endl;
+            cout << "Veuillez reessayer.\n" << endl;
             std::this_thread::sleep_for(std::chrono::seconds(2));
             system("color F0");
         }
@@ -229,15 +229,15 @@ istream& operator>>(istream& in, Personne* p)
 void Personne::modifier() {
     cout << "Modifier le nom: ";
     cin >> nom;
-    cout << "Modifier le prénom: ";
+    cout << "Modifier le prenom: ";
     cin >> prenom;
     cout << "Modifier le CIN: ";
     cin >> cinn;
-    cout << "Modifier l'email: ";
+    cout << "Modifier lemail: ";
     cin >> email;
     cout << "Modifier le password: ";
     cin >> password;
-    cout << "Modifier le téléphone: ";
+    cout << "Modifier le telephone: ";
     cin >> tlf;
     cout << "Modifier la date de naissance: ";
     cin >> date_naissance.jour >> date_naissance.mois >> date_naissance.anne;

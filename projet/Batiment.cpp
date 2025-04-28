@@ -159,13 +159,23 @@ istream& operator >>(istream& in, Batiment* batiment) {
 }
 
 void Batiment::enregistrerEtages() {
-        ofstream of("BD\\Etage.txt", ios::app);
-        for (auto e : etages) {
-            if (dynamic_cast<EtageAlzheimer*>(e)) {
-                of << "EtageAlzheimer" << " ";
-                of << *e;
-            }
+    ofstream of("BD\\Etage.txt", ios::app);
+    for (auto e : etages) {
+        if (EtageAlzheimer* alz = dynamic_cast<EtageAlzheimer*>(e)) {
+            of<<"EtageAlzheimer"<<" ";
+            of << *alz << endl;
+        } else if(EtageCardio* Card = dynamic_cast<EtageCardio*>(e)){
+            of<<"EtageCardio"<<" ";
+            of << *Card << endl;
         }
+         else if(EtageNeurologie* Card = dynamic_cast<EtageNeurologie*>(e)){
+            of<<"EtageNeurologie"<<" ";
+            of << *Card << endl;
+        } else{
+            of << "Etage ";
+            of << *e << endl;
+        }
+    }
 }
 
 void Batiment::afficherEtage() {
@@ -181,27 +191,31 @@ void Batiment::afficherEtage() {
     }
 }
 
-
-
-Etage* chargerEtageDepuisFichier(ifstream& in) {
-    string type;
-    in >> type;
-
-    if (type == "EtageAlzheimer") {
-        EtageAlzheimer* etage = new EtageAlzheimer();
-        in >> etage;
-        return etage;
+void Batiment::chargerEtages() {
+    ifstream in("BD\\Etage.txt");
+    if (!in.is_open()) {
+        cerr << "Erreur lors de l'ouverture du fichier." << endl;
+        return;
     }
 
-    return nullptr;
+    string type;
+    while (in >> type) {
+        if (type == "EtageAlzheimer") {
+            EtageAlzheimer* e = new EtageAlzheimer();
+            in >> e;
+            etages.push_back(e);
+        }
+         else if (type == "EtageCardio") {
+            EtageCardio* e = new EtageCardio();
+            in >> e;
+            etages.push_back(e);
+        }else if(type=="EtageNeurologie"){
+            EtageNeurologie* e = new EtageNeurologie();
+            in >> e;
+            etages.push_back(e);
+        }
+    }
+
+    in.close();
 }
 
- void Batiment::chargerEtages() {
-        ifstream in("BD\\Etage.txt");
-        while (!in.eof()) {
-            Etage* e = chargerEtageDepuisFichier(in);
-            if (e != nullptr)
-                etages.push_back(e);
-        }
-        in.close();
-}

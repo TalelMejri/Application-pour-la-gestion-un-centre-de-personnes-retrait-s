@@ -1,5 +1,7 @@
 #include "EtageCardio.h"
 #include <iostream>
+#include <fstream>
+
 using namespace std;
 
 EtageCardio::EtageCardio(int id, int nbr, string type) : Etage(id, type) {
@@ -22,35 +24,41 @@ EtageCardio& EtageCardio::operator=(const EtageCardio& other) {
     return *this;
 }
 
-ostream& operator <<(ostream& os, const EtageCardio& etageCardio) {
-    os << static_cast<const Etage&>(etageCardio);
-    os << " Nombre de chambres: " << etageCardio.nbr_chambre << " ";
+ostream& operator <<(ostream& os, const EtageCardio& etageAlz) {
+    os << static_cast<const Etage&>(etageAlz);
+    os << "  " << etageAlz.nbr_chambre ;
     return os;
 }
 
-ostream& operator <<(ostream& os, const EtageCardio* etageCardio) {
-    os << static_cast<const Etage*>(etageCardio);
-    os << " Nombre de chambres: " << etageCardio->nbr_chambre << " ";
+ostream& operator <<(ostream& os, const EtageCardio* etageAlz) {
+    os << static_cast<const Etage*>(etageAlz);
+    os << "  " << etageAlz->nbr_chambre ;
     return os;
 }
 
-istream& operator>>(istream& in, EtageCardio& etageCardio) {
-    in >> static_cast<Etage&>(etageCardio);
-    cout << "Entrez le nombre de chambres: ";
-    in >> etageCardio.nbr_chambre;
+istream& operator>>(istream& in, EtageCardio& etageAlz) {
+    in >> static_cast<Etage&>(etageAlz);
+    bool isConsole = (&in == &cin);
+    if (isConsole) cout << "Entrez le nombre de chambres: ";
+    in >> etageAlz.nbr_chambre;
     return in;
 }
 
-istream& operator>>(istream& in, EtageCardio* etageCardio) {
-    in >> static_cast<Etage*>(etageCardio);
-    cout << "Entrez le nombre de chambres: ";
-    in >> etageCardio->nbr_chambre;
+istream& operator>>(istream& in, EtageCardio* etageAlz) {
+    in >> static_cast<Etage*>(etageAlz);
+    bool isConsole = (&in == &cin);
+    if (isConsole)cout << "Entrez le nombre de chambres: ";
+    in >> etageAlz->nbr_chambre;
     return in;
 }
 
 void EtageCardio::afficherEtage() {
-    cout << "Etage Cardio - ID: " << Etage::getId() << endl;
+    cout << "Etage Alzheimer - ID: " << Etage::getId() <<" Nbr Chambre : " <<  nbr_chambre<< endl;
     for (auto chambre : chambres) {
         chambre->afficherChambre();
     }
 }
+
+
+
+

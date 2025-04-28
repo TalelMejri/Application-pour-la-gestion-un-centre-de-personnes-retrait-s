@@ -26,47 +26,39 @@ EtageAlzheimer& EtageAlzheimer::operator=(const EtageAlzheimer& other) {
 
 ostream& operator <<(ostream& os, const EtageAlzheimer& etageAlz) {
     os << static_cast<const Etage&>(etageAlz);
-    os << "  " << etageAlz.nbr_chambre << " ";
+    os << "  " << etageAlz.nbr_chambre ;
     return os;
 }
 
 ostream& operator <<(ostream& os, const EtageAlzheimer* etageAlz) {
     os << static_cast<const Etage*>(etageAlz);
-    os << "  " << etageAlz->nbr_chambre << " ";
+    os << "  " << etageAlz->nbr_chambre ;
     return os;
 }
 
 istream& operator>>(istream& in, EtageAlzheimer& etageAlz) {
     in >> static_cast<Etage&>(etageAlz);
-    cout << "Entrez le nombre de chambres: ";
+    bool isConsole = (&in == &cin);
+    if (isConsole) cout << "Entrez le nombre de chambres: ";
     in >> etageAlz.nbr_chambre;
     return in;
 }
 
 istream& operator>>(istream& in, EtageAlzheimer* etageAlz) {
     in >> static_cast<Etage*>(etageAlz);
-    cout << "Entrez le nombre de chambres: ";
+    bool isConsole = (&in == &cin);
+    if (isConsole)cout << "Entrez le nombre de chambres: ";
     in >> etageAlz->nbr_chambre;
     return in;
 }
 
 void EtageAlzheimer::afficherEtage() {
-    cout << "Etage Alzheimer - ID: " << Etage::getId() << endl;
+    cout << "Etage Alzheimer - ID: " << Etage::getId() <<" Nbr Chambre : " <<  nbr_chambre<< endl;
     for (auto chambre : chambres) {
         chambre->afficherChambre();
     }
 }
 
-void EtageAlzheimer::ecrirerEtageAlzheimerDansFichier(){
-    try{
-            ofstream of("BD\\Etage.txt", ios::app);
-            of<<"EtageAlzheimer"<<" ";
-            of<<this;
-            of.close();
-    }catch(exception e){
-        cerr<<"Erreur"<<e.what();
-    }
-}
 
 
 

@@ -60,7 +60,7 @@ void Resident::modifier() {
     cout << "Nouveau solde : ";
     cin >> soldeVal;
     solde = soldeVal;
-    cout << "Solde modifié: " << solde << " dinars" << endl;
+    cout << "Solde modifie: " << solde << " dinars" << endl;
 }
 
 void Resident::modifierSolde(float nouveauSolde) {
@@ -91,7 +91,7 @@ ostream& operator<<(ostream& os, const Resident* r) {
 istream& operator>>(istream& is, Resident& r) {
     is >> static_cast <Personne&>(r);
      r.solde = 0;
-    is >> r.solde;
+    //is >> r.solde;
     string  test;
     if(test=="0"){
         r.dossierMedical = nullptr;
@@ -104,7 +104,7 @@ istream& operator>>(istream& is, Resident& r) {
 istream& operator>>(istream& is, Resident* r) {
     is >> static_cast <Personne*>(r);
      r->solde = 0;
-    is >> r->solde;
+    //is >> r->solde;
     return is;
 }
 
