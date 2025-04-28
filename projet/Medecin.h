@@ -1,10 +1,12 @@
 #ifndef MEDECIN_H_INCLUDED
 #define MEDECIN_H_INCLUDED
 
-#include "Personnel.h"
+
 #include "Category.h"
 #include "Infirmier.h"
 #include "stack"
+#include "Resident.h"
+
 using namespace std;
 
 class Medecin : virtual public Personnel {
@@ -29,6 +31,7 @@ public:
     void ecrirerMedecinDansFichier();
     void afficherPersonne() ;
     void modifier() ;
+    void sauvegarderDossierMedical( Resident resident);
     void LireInfirmierFromFichier();
     void assignerInfirmier(Infirmier* inf);
     void afficherInfirmiersAssignes() const;
@@ -39,7 +42,7 @@ public:
     void SupprimerCategory(int);
     void afficherCategories();
     void sauvegarderInfDansFichier();
-    void ajouterDossierMedicalResident();
+    void ajouterDossierMedicalResident(vector<Resident>);
     string getSpecialite() const { return specialite; }
     vector<Category> getCategories() { return categories; }
 

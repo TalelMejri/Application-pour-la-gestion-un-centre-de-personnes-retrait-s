@@ -237,7 +237,7 @@ void MenuResponsable(Responsable& responsable) {
     } while (choix != 0);
 }
 
-void MenuMedecin(Medecin& med) {
+void MenuMedecin(Medecin& med,vector<Resident> res) {
     int choix;
     do {
         system("cls");
@@ -261,9 +261,10 @@ void MenuMedecin(Medecin& med) {
                 cin.get();
                 break;
             }
-             case 2:
-                    med.ajouterDossierMedicalResident();
+             case 2:{
+                   med.ajouterDossierMedicalResident(res);
                     break;
+             }
             case 3: {
                 int sousChoix;
                 do {
@@ -423,4 +424,57 @@ void menuInfirmier(Infirmier infirmier) {
                 cout << "Choix invalide. Veuillez reessayer." << endl;
         }
     } while (choix != 2);
+}
+
+
+void MenuResident(Resident& resident) {
+    int choix;
+    do {
+        system("cls");
+        cout << "\n===== MENU RESIDENT =====" << endl;
+        cout << "1. Afficher mes informations" << endl;
+        cout << "2. Modifier mes informations" << endl;
+        cout << "3. Consulter mon dossier medical" << endl;  // Nouvelle option
+        cout << "4. Deconnexion" << endl;
+        cout << "Votre choix: ";
+        cin >> choix;
+
+        switch (choix) {
+            case 1:
+                system("cls");
+                cout << "\n--- Mes Informations ---\n";
+                resident.afficherPersonne();
+                cout << "\nAppuyez sur Entree pour continuer...";
+                cin.ignore();
+                cin.get();
+                break;
+
+            case 2:
+                system("cls");
+                cout << "\n--- Modification des informations ---\n";
+                resident.modifier();
+                cout << "\nAppuyez sur Entree pour continuer...";
+                cin.ignore();
+                cin.get();
+                break;
+
+            case 3:
+                system("cls");
+                resident.consulterDossierMedical();
+                cout << "\nAppuyez sur Entree pour continuer...";
+                cin.ignore();
+                cin.get();
+                break;
+
+            case 4:
+                LogoutUser();
+                cout << "Deconnexion reussie." << endl;
+                break;
+
+            default:
+                cout << "Choix invalide. Veuillez reessayer." << endl;
+                cin.ignore();
+                cin.get();
+        }
+    } while (choix != 4);
 }

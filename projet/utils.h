@@ -5,8 +5,9 @@ void afficherChargement(const char* message, int duree) ;
 void LogoutUser();
 void resteConnecte(string email,string role);
 void MenuResponsable(Responsable& res);
-void MenuMedecin(Medecin& med);
+void MenuMedecin(Medecin& med,vector<Resident>);
 void menuInfirmier(Infirmier );
+void MenuResident(Resident& resident);
 void Connexion(credentials& connectedUser, credentials& c);
 template<typename T>
 T GetUserDetails( string email,  string role) {

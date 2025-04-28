@@ -24,7 +24,7 @@ public:
     void modifier() ;
     void modifierSolde(float);
     void saisirResident();
-
+    void consulterDossierMedical() const;
 
     float getSolde() { return solde; }
     DossierMedical* getDossierMedical() { return dossierMedical; }

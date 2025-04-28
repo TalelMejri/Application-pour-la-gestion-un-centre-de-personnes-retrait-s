@@ -142,4 +142,26 @@ void Resident::ecrirerResidentDansFichier(){
     }
 }
 
+void Resident::consulterDossierMedical() const {
+
+    cout << "\n=== VOTRE DOSSIER MEDICAL ===\n";
+    cout << "Nom: " << getNom() << " " << getPrenom() << endl;
+    cout << "ID: " << getId() << endl;
+    cout << "----------------------------\n";
+
+    string filename = "BD\\DossierMedical_" + to_string(getId()) + ".txt";
+
+    ifstream file(filename);
+    if (!file.is_open()) {
+        cout << "Impossible d'ouvrir votre dossier medical.\n";
+        return;
+    }
+
+    string line;
+    while (getline(file, line)) {
+        cout << line << endl;
+    }
+    file.close();
+}
+
 

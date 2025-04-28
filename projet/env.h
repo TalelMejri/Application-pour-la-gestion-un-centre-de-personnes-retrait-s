@@ -19,5 +19,6 @@
 #include "EtageNeurologie.h"
 #include "credentials.h"
 #include "utils.h"
+#include "stack"
 
 #endif // ENV_H_INCLUDED

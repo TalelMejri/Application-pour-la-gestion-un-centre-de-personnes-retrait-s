@@ -30,9 +30,9 @@ class Personne{
         friend istream& operator >>(istream& ,Personne*);
         Personne & operator=(const Personne&) ;
 
-        int getId(){ return id; }
-        string getNom(){ return nom; }
-        string getPrenom(){ return prenom; }
+        int getId()const{ return id; }
+        string getNom()const{ return nom; }
+        string getPrenom()const{ return prenom; }
         string getCIN(){ return cinn; }
         string getEmail(){ return email; }
         string getPassword(){ return password; }

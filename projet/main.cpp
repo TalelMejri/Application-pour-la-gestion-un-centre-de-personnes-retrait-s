@@ -17,15 +17,24 @@ int main() {
         }
         if (connectedUser.role == "Resident") {
             Resident r = GetUserDetails<Resident>(connectedUser.email, connectedUser.role);
-            //cout << r;
-            // MenuResident(r);
+            MenuResident(r);
         } else if (connectedUser.role == "Infirmier") {
             Infirmier inf = GetUserDetails<Infirmier>(connectedUser.email, connectedUser.role);
             menuInfirmier(inf);
         } else if (connectedUser.role == "Medecin") {
             Medecin med = GetUserDetails<Medecin>(connectedUser.email, connectedUser.role);
-
-            MenuMedecin(med);
+            vector<Resident> residents;
+            try{
+                ifstream of("BD\\Resident.txt");
+                Resident r;
+                while (of >> r) {
+                        residents.push_back(r);
+                }
+                of.close();
+            }catch(exception e){
+                    cerr<<"Erreur"<<e.what();
+            }
+            MenuMedecin(med,residents);
         }  else if (connectedUser.role == "Responsable") {
             Responsable res = GetUserDetails<Responsable>(connectedUser.email, connectedUser.role);
             MenuResponsable(res);

@@ -31,19 +31,7 @@ void Medecin::afficherPersonne() {
     afficherCategories();
 }
 
-void Medecin::ajouterDossierMedicalResident() {
-    vector<Resident> residents;
-     try{
-            ifstream of("BD\\Resident.txt");
-            Resident r;
-           while (of >> r) {
-                residents.push_back(r);
-            }
-            of.close();
-    }catch(exception e){
-        cerr<<"Erreur"<<e.what();
-    }
-
+void Medecin::ajouterDossierMedicalResident(vector<Resident> residents) {
     if (residents.empty()) {
         cout << "Aucun resident disponible.\n";
         return;
@@ -51,13 +39,13 @@ void Medecin::ajouterDossierMedicalResident() {
 
     cout << "\nListe des residents:\n";
     for (size_t i = 0; i < residents.size(); ++i) {
-        cout << i+1 << ". ";
-        residents[i].afficherPersonne();
-        cout << "-----------------\n";
+        cout << i+1 << ". ID: " << residents[i].getId()
+             << " - " << residents[i].getNom()
+             << " " << residents[i].getPrenom() << endl;
     }
 
     int choix;
-    cout << "Selectionnez un resident: ";
+    cout << "Selectionnez un resident (numero): ";
     cin >> choix;
 
     if (choix < 1 || choix > static_cast<int>(residents.size())) {
@@ -65,10 +53,63 @@ void Medecin::ajouterDossierMedicalResident() {
         return;
     }
 
-    DossierMedical* nouveauDossier = new DossierMedical();
-    residents[choix-1].setDossierMedical(nouveauDossier);
+    Resident& resident = residents[choix-1];
+    int idResident = resident.getId();
 
-    cout << "Dossier medical ajoute avec succes!\n";
+    DossierMedical* nouveauDossier = new DossierMedical();
+    cout << "\nCreation du dossier medical pour le resident ID: " << idResident << endl;
+    cout << "Combien de medicaments souhaitez-vous ajouter? ";
+    int nbMedicaments;
+    cin >> nbMedicaments;
+
+    for (int i = 0; i < nbMedicaments; i++) {
+        Medicament* med = new Medicament();
+        cout << "\nMedicament " << i+1 << ":\n";
+        cin >> *med;
+        nouveauDossier->ajouterMedicament(med);
+    }
+
+    resident.setDossierMedical(nouveauDossier);
+
+    sauvegarderDossierMedical(resident);
+}
+
+void Medecin::sauvegarderDossierMedical( Resident resident) {
+    if (!resident.getDossierMedical()) {
+        cout << "Aucun dossier medical a sauvegarder.\n";
+        return;
+    }
+
+    string filename = "BD/DossierMedical_" + to_string(resident.getId()) + ".txt";
+
+    try {
+        ofstream file(filename);
+        if (!file.is_open()) {
+            throw runtime_error("Impossible d'ouvrir le fichier");
+        }
+
+        file << "=== Dossier Medical du Resident ID: " << resident.getId() << " ===\n";
+        file << "Nom: " << resident.getNom() << " " << resident.getPrenom() << "\n\n";
+
+        file << "Medicaments:\n";
+        file << "------------\n";
+
+        for (Medicament* med : resident.getDossierMedical()->getMedicaments()) {
+            file << "ID Medicament: " << med->getId() << "\n";
+            file << "Nom: " << med->getNom() << "\n";
+            file << "Quantite: " << med->getQuantite() << "\n";
+            file << "Date expiration: "
+                 << med->getDateLimit().jour << "/"
+                 << med->getDateLimit().mois << "/"
+                 << med->getDateLimit().annee << "\n";
+            file << "------------\n";
+        }
+
+        file.close();
+        cout << "Dossier medical sauvegarde dans " << filename << endl;
+    } catch (const exception& e) {
+        cerr << "Erreur lors de la sauvegarde: " << e.what() << endl;
+    }
 }
 
 void Medecin::modifier() {
