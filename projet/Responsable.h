@@ -27,6 +27,7 @@ public:
     void sauvegarderResidentsDansFichier();
     void sauvegarderMedecinDansFichier();
     void sauvegarderMedecinInfirmierDansFichier();
+    void sauvegarderEtageDansFichier();
     void afficherPersonne();
     void modifier();
     void ajouterEmploye(Personnel* employe);

@@ -9,7 +9,6 @@ using namespace std;
 
 class DossierMedical {
 private:
-
     list<Medicament*> medicaments;
 
 public:

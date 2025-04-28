@@ -53,7 +53,7 @@ istream& operator>>(istream& in, EtageNeurologie* etageAlz) {
 }
 
 void EtageNeurologie::afficherEtage() {
-    cout << "Etage Alzheimer - ID: " << Etage::getId() <<" Nbr Chambre : " <<  nbr_chambre<< endl;
+    cout << "Etage Neurologie - ID: " << Etage::getId() <<" Nbr Chambre : " <<  nbr_chambre<< endl;
     for (auto chambre : chambres) {
         chambre->afficherChambre();
     }

@@ -6,6 +6,7 @@
 
 class Etage {
 protected:
+    static int idCounter;
     int id;
     string type;
     vector<Chambre*> chambres;

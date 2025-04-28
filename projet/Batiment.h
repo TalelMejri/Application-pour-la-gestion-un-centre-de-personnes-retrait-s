@@ -1,6 +1,7 @@
 #ifndef BATIMENT_H_INCLUDED
 #define BATIMENT_H_INCLUDED
-
+#include <map>
+#include <list>
 #include <vector>
 #include "Personne.h"
 #include "Etage.h"
@@ -9,7 +10,7 @@ class Batiment {
 private:
     string nom;
     string adresse;
-    vector<Etage*> etages;
+    map<string, list<Etage*>> etages;
     vector<Personne*> personnes;
 
 public:
@@ -25,19 +26,19 @@ public:
     Batiment& operator=(const Batiment&);
     Batiment(const Batiment&);
 
-    void ajouterEtage(Etage* etage);
+    void ajouterEtage(const string& type, Etage* etage);
     void ajouterPersonne(Personne* personne);
     void afficherBatiment();
     void afficherEtage();
-    void supprimerEtage(int id);
+    void supprimerEtage(const string& type, int id);
     void supprimerPersonne(int id);
     void enregistrerEtages();
+    void sauvegarderEtageDansFichier();
     void chargerEtages() ;
     string getNom() { return nom; }
     string getAdresse() { return adresse; }
-    vector<Etage*> getEtages() { return etages; }
+    map<string, list<Etage*>> getEtages() { return etages; }
     vector<Personne*> getPersonnes() { return personnes; }
-
     void setNom(string nomVal) { nom = nomVal; }
     void setAdresse(string adresseVal) { adresse = adresseVal; }
 };

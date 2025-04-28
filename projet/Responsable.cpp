@@ -5,6 +5,7 @@ Responsable::Responsable() : Personne() {
     LireResidentFromFichier();
     LireMedecinFromFichier();
     LireMedecinInfirmierFromFichier();
+    batiment.chargerEtages();
 }
 
 Responsable::Responsable(int id, string nom, string prenom, string cinn, string email, string password, string tlf, DatePerso date_naissance)
@@ -12,6 +13,7 @@ Responsable::Responsable(int id, string nom, string prenom, string cinn, string 
             LireResidentFromFichier();
             LireMedecinFromFichier();
             LireMedecinInfirmierFromFichier();
+            batiment.chargerEtages();
 }
 
 Responsable::~Responsable() {
@@ -264,7 +266,6 @@ void Responsable::sauvegarderMedecinDansFichier() {
         cerr << "Erreur lors de la sauvegarde des residents : " << e.what() << endl;
     }
 }
-
 
 void Responsable::sauvegarderMedecinInfirmierDansFichier() {
     try {

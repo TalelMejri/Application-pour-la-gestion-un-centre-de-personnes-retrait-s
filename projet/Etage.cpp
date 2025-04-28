@@ -5,10 +5,13 @@
 
 #include <iostream>
 using namespace std;
+int Etage::idCounter = 0;
 
-Etage::Etage() : id(0), type("") {}
+Etage::Etage() : id(0), type("") {id = ++idCounter;}
 
-Etage::Etage(int idVal, string typeVal) : id(idVal), type(typeVal) {}
+Etage::Etage(int idVal, string typeVal) : id(idVal), type(typeVal) {
+    id = idVal != -1 ? idVal : ++idCounter;
+}
 
 Etage::~Etage() {
     for (size_t i = 0; i < chambres.size(); ++i) {
@@ -38,8 +41,8 @@ istream& operator>>(istream& is, Etage& etage) {
     is >> etage.id;
     cout << " ";
     is >> etage.type;
-                 bool isConsole = (&is == &cin);
-if (isConsole) {
+    bool isConsole = (&is == &cin);
+    if (isConsole) {
         int n;
    cout << "How many rooms to enter? ";
    is >> n;

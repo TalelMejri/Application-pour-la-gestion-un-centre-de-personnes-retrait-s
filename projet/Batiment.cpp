@@ -3,6 +3,7 @@
 #include "EtageAlzheimer.h"
 #include "EtageCardio.h"
 #include "EtageNeurologie.h"
+#include <map>
 #include <fstream>
 
 using namespace std;
@@ -12,8 +13,10 @@ Batiment::Batiment() : nom(""), adresse("") {}
 Batiment::Batiment(string nomVal, string adresseVal) : nom(nomVal), adresse(adresseVal) {}
 
 Batiment::~Batiment() {
-    for (size_t i = 0; i < etages.size(); ++i) {
-        delete etages[i];
+    for (auto& pair : etages) {
+        for (Etage* etage : pair.second) {
+            delete etage;
+        }
     }
     for (size_t i = 0; i < personnes.size(); ++i) {
         delete personnes[i];
@@ -21,27 +24,41 @@ Batiment::~Batiment() {
 }
 
 Batiment::Batiment(const Batiment& other) : nom(other.nom), adresse(other.adresse) {
-        personnes=(other.personnes);
-        Etage* p;
-        for (unsigned int i = 0; i < other.etages.size(); i++) {
-            if (typeid(*other.etages[i]) == typeid(EtageAlzheimer)) {
-                const EtageAlzheimer* etAZ = dynamic_cast<const EtageAlzheimer*>(other.etages[i]);
-                if (etAZ) p = static_cast<Etage*>(new EtageAlzheimer(*etAZ));
-            } else if (typeid(*other.etages[i]) == typeid(EtageCardio)) {
-                 const EtageCardio* etCAR = dynamic_cast<const EtageCardio*>(other.etages[i]);
-                if (etCAR) p = static_cast<Etage*>(new EtageCardio(*etCAR));
-            } else if(typeid(*other.etages[i]) == typeid(EtageNeurologie)){
-                 const EtageNeurologie* etNeu = dynamic_cast<const EtageNeurologie*>(other.etages[i]);
-                if (etNeu) p = static_cast<Etage*>(new EtageNeurologie(*etNeu));
+    personnes = other.personnes;
+
+    for (const auto& pair : other.etages) {
+        const string& type = pair.first;
+        list<Etage*> newList;
+
+        for (Etage* original : pair.second) {
+            Etage* copy = nullptr;
+
+            if (typeid(*original) == typeid(EtageAlzheimer)) {
+                copy = new EtageAlzheimer(*dynamic_cast<EtageAlzheimer*>(original));
             }
-            etages.push_back(p);
+            else if (typeid(*original) == typeid(EtageCardio)) {
+                copy = new EtageCardio(*dynamic_cast<EtageCardio*>(original));
+            }
+            else if (typeid(*original) == typeid(EtageNeurologie)) {
+                copy = new EtageNeurologie(*dynamic_cast<EtageNeurologie*>(original));
+            }
+
+            if (copy) {
+                newList.push_back(copy);
+            }
         }
+
+        etages[type] = newList;
+    }
 }
 
 Batiment& Batiment::operator=(const Batiment& other) {
     if (this != &other) {
-        for (size_t i = 0; i < etages.size(); ++i) {
-            delete etages[i];
+        // Nettoyer les données existantes
+        for (auto& pair : etages) {
+            for (Etage* etage : pair.second) {
+                delete etage;
+            }
         }
         for (size_t i = 0; i < personnes.size(); ++i) {
             delete personnes[i];
@@ -49,31 +66,39 @@ Batiment& Batiment::operator=(const Batiment& other) {
 
         nom = other.nom;
         adresse = other.adresse;
-
+        personnes = other.personnes;
         etages.clear();
-        personnes.clear();
-        personnes=(other.personnes);
-        Etage* p;
-        for (unsigned int i = 0; i < other.etages.size(); i++) {
-            if (typeid(*other.etages[i]) == typeid(EtageAlzheimer)) {
-                const EtageAlzheimer* etAZ = dynamic_cast<const EtageAlzheimer*>(other.etages[i]);
-                if (etAZ) p = static_cast<Etage*>(new EtageAlzheimer(*etAZ));
-            } else if (typeid(*other.etages[i]) == typeid(EtageCardio)) {
-                 const EtageCardio* etCAR = dynamic_cast<const EtageCardio*>(other.etages[i]);
-                if (etCAR) p = static_cast<Etage*>(new EtageCardio(*etCAR));
-            } else if(typeid(*other.etages[i]) == typeid(EtageNeurologie)){
-                 const EtageNeurologie* etNeu = dynamic_cast<const EtageNeurologie*>(other.etages[i]);
-                if (etNeu) p = static_cast<Etage*>(new EtageNeurologie(*etNeu));
-            }
-            etages.push_back(p);
-        }
 
+        for (const auto& pair : other.etages) {
+            const string& type = pair.first;
+            list<Etage*> newList;
+
+            for (Etage* original : pair.second) {
+                Etage* copy = nullptr;
+
+                if (typeid(*original) == typeid(EtageAlzheimer)) {
+                    copy = new EtageAlzheimer(*dynamic_cast<EtageAlzheimer*>(original));
+                }
+                else if (typeid(*original) == typeid(EtageCardio)) {
+                    copy = new EtageCardio(*dynamic_cast<EtageCardio*>(original));
+                }
+                else if (typeid(*original) == typeid(EtageNeurologie)) {
+                    copy = new EtageNeurologie(*dynamic_cast<EtageNeurologie*>(original));
+                }
+
+                if (copy) {
+                    newList.push_back(copy);
+                }
+            }
+
+            etages[type] = newList;
+        }
     }
     return *this;
 }
 
-void Batiment::ajouterEtage(Etage* etage) {
-    etages.push_back(etage);
+void Batiment::ajouterEtage(const string& type, Etage* etage) {
+    etages[type].push_back(etage);
 }
 
 void Batiment::ajouterPersonne(Personne* personne) {
@@ -84,8 +109,11 @@ void Batiment::afficherBatiment() {
     cout << "Batiment: " << nom << endl;
     cout << "Adresse: " << adresse << endl;
     cout << "Etages: " << endl;
-    for (auto etage : etages) {
-        etage->afficherEtage();
+    for (const auto& pair : etages) {
+        cout << "Type: " << pair.first << " (" << pair.second.size() << " étages)" << endl;
+        for (Etage* etage : pair.second) {
+            etage->afficherEtage();
+        }
     }
     cout << "Personnes: " << endl;
     for (auto personne : personnes) {
@@ -93,12 +121,17 @@ void Batiment::afficherBatiment() {
     }
 }
 
-void Batiment::supprimerEtage(int id) {
-    for (size_t i = 0; i < etages.size(); ++i) {
-        if (etages[i]->getId() == id) {
-            delete etages[i];
-            etages.erase(etages.begin() + i);
-            break;
+void Batiment::supprimerEtage(const string& type, int id) {
+    auto it = etages.find(type);
+    if (it != etages.end()) {
+        list<Etage*>& etageList = it->second;
+        for (auto listIt = etageList.begin(); listIt != etageList.end(); ++listIt) {
+            if ((*listIt)->getId() == id) {
+                delete *listIt;
+                etageList.erase(listIt);
+                sauvegarderEtageDansFichier();
+                break;
+            }
         }
     }
 }
@@ -113,13 +146,15 @@ void Batiment::supprimerPersonne(int id) {
     }
 }
 
-
 ostream& operator <<(ostream& os, const Batiment& batiment) {
     os << "Batiment: " << batiment.nom << endl;
     os << "Adresse: " << batiment.adresse << endl;
     os << "Etages: " << endl;
-    for (auto etage : batiment.etages) {
-        os << *etage;
+    for (const auto& pair : batiment.etages) {
+        os << "Type: " << pair.first << " (" << pair.second.size() << " étages)" << endl;
+        for (Etage* etage : pair.second) {
+            os << *etage;
+        }
     }
     os << "Personnes: " << endl;
     for (auto personne : batiment.personnes) {
@@ -132,8 +167,11 @@ ostream& operator <<(ostream& os, const Batiment* batiment) {
     os << "Batiment: " << batiment->nom << endl;
     os << "Adresse: " << batiment->adresse << endl;
     os << "Etages: " << endl;
-    for (auto etage : batiment->etages) {
-        os << *etage;
+    for (const auto& pair : batiment->etages) {
+        os << "Type: " << pair.first << " (" << pair.second.size() << " étages)" << endl;
+        for (Etage* etage : pair.second) {
+            os << *etage;
+        }
     }
     os << "Personnes: " << endl;
     for (auto personne : batiment->personnes) {
@@ -160,20 +198,19 @@ istream& operator >>(istream& in, Batiment* batiment) {
 
 void Batiment::enregistrerEtages() {
     ofstream of("BD\\Etage.txt", ios::app);
-    for (auto e : etages) {
-        if (EtageAlzheimer* alz = dynamic_cast<EtageAlzheimer*>(e)) {
-            of<<"EtageAlzheimer"<<" ";
-            of << *alz << endl;
-        } else if(EtageCardio* Card = dynamic_cast<EtageCardio*>(e)){
-            of<<"EtageCardio"<<" ";
-            of << *Card << endl;
-        }
-         else if(EtageNeurologie* Card = dynamic_cast<EtageNeurologie*>(e)){
-            of<<"EtageNeurologie"<<" ";
-            of << *Card << endl;
-        } else{
-            of << "Etage ";
-            of << *e << endl;
+    for (const auto& pair : etages) {
+        const string& type = pair.first;
+        for (Etage* e : pair.second) {
+            of << type << " ";
+            if (EtageAlzheimer* alz = dynamic_cast<EtageAlzheimer*>(e)) {
+                of << *alz << endl;
+            } else if (EtageNeurologie* neuro = dynamic_cast<EtageNeurologie*>(e)) {
+                of << *neuro << endl;
+            } else if (EtageCardio* cardio = dynamic_cast<EtageCardio*>(e)) {
+                of << *cardio << endl;
+            } else {
+                of << *e << endl;
+            }
         }
     }
 }
@@ -183,9 +220,11 @@ void Batiment::afficherEtage() {
         cout << "Aucun étage enregistré dans le bâtiment." << endl;
     } else {
         cout << "===== Liste des étages du bâtiment =====" << endl;
-        for (auto etage : etages) {
-            if (etage != nullptr)
+        for (const auto& pair : etages) {
+            cout << "Type: " << pair.first << " (" << pair.second.size() << " etages)" << endl;
+            for (Etage* etage : pair.second) {
                 etage->afficherEtage();
+            }
         }
         cout << "========================================" << endl;
     }
@@ -200,22 +239,52 @@ void Batiment::chargerEtages() {
 
     string type;
     while (in >> type) {
-        if (type == "EtageAlzheimer") {
+        if (type == "Alzheimer") {
             EtageAlzheimer* e = new EtageAlzheimer();
             in >> e;
-            etages.push_back(e);
+            etages[type].push_back(e);
         }
-         else if (type == "EtageCardio") {
+         else if (type == "Cardio") {
             EtageCardio* e = new EtageCardio();
             in >> e;
-            etages.push_back(e);
-        }else if(type=="EtageNeurologie"){
+            etages[type].push_back(e);
+        }else if(type=="Neurologie"){
             EtageNeurologie* e = new EtageNeurologie();
             in >> e;
-            etages.push_back(e);
+            etages[type].push_back(e);
         }
     }
 
     in.close();
 }
 
+void Batiment::sauvegarderEtageDansFichier() {
+    try {
+        ofstream of("BD\\Etage.txt", ios::trunc);
+        if (!of) {
+            cerr << "Erreur lors de l'ouverture du fichier pour l'écriture.\n";
+            return;
+        }
+
+        for (const auto& pair : etages) {
+            const string& type = pair.first;
+            for (Etage* e : pair.second) {
+                of << type << " ";
+                if (EtageAlzheimer* alz = dynamic_cast<EtageAlzheimer*>(e)) {
+                    of << *alz << endl;
+                } else if (EtageNeurologie* neuro = dynamic_cast<EtageNeurologie*>(e)) {
+                    of << *neuro << endl;
+                } else if (EtageCardio* cardio = dynamic_cast<EtageCardio*>(e)) {
+                    of << *cardio << endl;
+                } else {
+                    of << *e << endl;
+                }
+            }
+        }
+
+        of.close();
+        cout << "Etages mis à jour dans le fichier avec succès.\n";
+    } catch (exception& e) {
+        cerr << "Erreur lors de la sauvegarde des étages : " << e.what() << endl;
+    }
+}

@@ -65,7 +65,7 @@ void Infirmier::afficherHoraires()  {
 
 ostream& operator<<(ostream& out, const Infirmier& inf) {
     out << static_cast<const Personnel&>(inf);
-    out << inf.experience <<" ";
+    out << " "<<inf.experience <<" ";
     for (const auto& jour : inf.jours) {
         auto it = inf.horaires.find(jour);
         if (it != inf.horaires.end()) {
@@ -74,19 +74,25 @@ ostream& operator<<(ostream& out, const Infirmier& inf) {
             out << jour << " ";
         }
     }
+    out<<endl;
     return out;
 }
 
 istream& operator>>(istream& in, Infirmier& inf) {
     in >> static_cast<Personnel&>(inf);
-    cout << "Entrer l'expérience (en années) : ";
+    bool isConsole = (&in == &cin);
+    if(isConsole){
+        cout << "Entrer l'expérience (en annees) : ";
+    }
     in >> inf.experience;
-    inf.saisirHoraires();
+        if(isConsole){
+            inf.saisirHoraires();
+        }
     return in;
 }
 
 ostream& operator<<(ostream& out, const Infirmier* inf) {
-    return out << *inf;
+    return out<< *inf<<endl;
 }
 
 istream& operator>>(istream& in, Infirmier* inf) {

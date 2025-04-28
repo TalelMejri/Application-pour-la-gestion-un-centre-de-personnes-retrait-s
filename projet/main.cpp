@@ -15,28 +15,29 @@ int main() {
         if (connectedUser.email == "") {
             Connexion(connectedUser, c);
         }
-
         if (connectedUser.role == "Resident") {
             Resident r = GetUserDetails<Resident>(connectedUser.email, connectedUser.role);
-            cout << r;
+            //cout << r;
             // MenuResident(r);
         } else if (connectedUser.role == "Infirmier") {
             Infirmier inf = GetUserDetails<Infirmier>(connectedUser.email, connectedUser.role);
-            // MenuInfirmier(inf);
+            menuInfirmier(inf);
         } else if (connectedUser.role == "Medecin") {
             Medecin med = GetUserDetails<Medecin>(connectedUser.email, connectedUser.role);
-            // MenuMedecin(med);
-        } else if (connectedUser.role == "MedecinInfirmier") {
-            MedecinInfirmier medInf = GetUserDetails<MedecinInfirmier>(connectedUser.email, connectedUser.role);
-            // MenuMedecinInfirmier(medInf);
-        } else if (connectedUser.role == "Responsable") {
+
+            MenuMedecin(med);
+        }  else if (connectedUser.role == "Responsable") {
             Responsable res = GetUserDetails<Responsable>(connectedUser.email, connectedUser.role);
             MenuResponsable(res);
         }
-
         connectedUser.email = "";
         connectedUser.role = "";
     }
 
     return 0;
 }
+
+/*else if (connectedUser.role == "MedecinInfirmier") {
+            MedecinInfirmier medInf = GetUserDetails<MedecinInfirmier>(connectedUser.email, connectedUser.role);
+            // MenuMedecinInfirmier(medInf);
+}*/
