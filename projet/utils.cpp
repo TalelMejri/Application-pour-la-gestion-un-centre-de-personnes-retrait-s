@@ -237,7 +237,7 @@ void MenuResponsable(Responsable& responsable) {
     } while (choix != 0);
 }
 
-void MenuMedecin(Medecin& med,vector<Resident> res) {
+void MenuMedecin(Medecin& med, vector<Resident> res) {
     int choix;
     do {
         system("cls");
@@ -250,7 +250,8 @@ void MenuMedecin(Medecin& med,vector<Resident> res) {
         cout << "6. Deconnexion" << endl;
         cout << "Votre choix: ";
         cin >> choix;
-        vector<Infirmier*> listeInfirmiers=med.getinfirmiersAssignes();
+        vector<Infirmier*> listeInfirmiers = med.getinfirmiersAssignes();
+
         switch (choix) {
             case 1: {
                 system("cls");
@@ -261,10 +262,13 @@ void MenuMedecin(Medecin& med,vector<Resident> res) {
                 cin.get();
                 break;
             }
-             case 2:{
-                   med.ajouterDossierMedicalResident(res);
-                    break;
-             }
+            case 2: {
+                med.ajouterDossierMedicalResident(res);
+                cout << "\nAppuyez sur Entree pour continuer...";
+                cin.ignore();
+                cin.get();
+                break;
+            }
             case 3: {
                 int sousChoix;
                 do {
@@ -283,15 +287,15 @@ void MenuMedecin(Medecin& med,vector<Resident> res) {
                             med.afficherInfirmiersAssignes();
                             break;
                         case 2: {
-                                Infirmier* nouvelInfirmier = new Infirmier();
-                                cout << "\n--- Ajouter un nouvel infirmier ---\n";
-                                cin >> *nouvelInfirmier;
-                                med.assignerInfirmier(nouvelInfirmier);
-                                nouvelInfirmier->ecrirerInfirmierDansFichier();
-                                credentials c;
-                                c.SaveCredentials(nouvelInfirmier->getEmail(), nouvelInfirmier->getPassword(), "Infirmier");
-                                cout << "Infirmier ajouté et assigné avec succès!\n";
-                                break;
+                            Infirmier* nouvelInfirmier = new Infirmier();
+                            cout << "\n--- Ajouter un nouvel infirmier ---\n";
+                            cin >> *nouvelInfirmier;
+                            med.assignerInfirmier(nouvelInfirmier);
+                            nouvelInfirmier->ecrirerInfirmierDansFichier();
+                            credentials c;
+                            c.SaveCredentials(nouvelInfirmier->getEmail(), nouvelInfirmier->getPassword(), "Infirmier");
+                            cout << "Infirmier ajouté et assigné avec succès!\n";
+                            break;
                         }
                         case 3:
                             med.modifierInfirmierAssignes();
@@ -372,13 +376,16 @@ void MenuMedecin(Medecin& med,vector<Resident> res) {
                 } while (sousChoix != 5);
                 break;
             }
-            case 5:{
+            case 5: {
+                system("cls");
                 med.AfficherReclamations();
+                cout << "\nAppuyez sur Entree pour continuer...";
+                cin.ignore();
+                cin.get();
                 break;
             }
             case 6:
                 LogoutUser();
-                cout << "Deconnexion reussie." << endl;
                 break;
             default:
                 cout << "Choix invalide. Veuillez reessayer." << endl;
@@ -387,7 +394,6 @@ void MenuMedecin(Medecin& med,vector<Resident> res) {
         }
     } while (choix != 6);
 }
-
 
 void menuInfirmier(Infirmier infirmier) {
     int choix;
@@ -433,9 +439,8 @@ void MenuResident(Resident& resident) {
         system("cls");
         cout << "\n===== MENU RESIDENT =====" << endl;
         cout << "1. Afficher mes informations" << endl;
-        cout << "2. Modifier mes informations" << endl;
-        cout << "3. Consulter mon dossier medical" << endl;  // Nouvelle option
-        cout << "4. Deconnexion" << endl;
+        cout << "2. Consulter mon dossier medical" << endl;
+        cout << "3. Deconnexion" << endl;
         cout << "Votre choix: ";
         cin >> choix;
 
@@ -448,17 +453,7 @@ void MenuResident(Resident& resident) {
                 cin.ignore();
                 cin.get();
                 break;
-
             case 2:
-                system("cls");
-                cout << "\n--- Modification des informations ---\n";
-                resident.modifier();
-                cout << "\nAppuyez sur Entree pour continuer...";
-                cin.ignore();
-                cin.get();
-                break;
-
-            case 3:
                 system("cls");
                 resident.consulterDossierMedical();
                 cout << "\nAppuyez sur Entree pour continuer...";
@@ -466,7 +461,7 @@ void MenuResident(Resident& resident) {
                 cin.get();
                 break;
 
-            case 4:
+            case 3:
                 LogoutUser();
                 cout << "Deconnexion reussie." << endl;
                 break;
@@ -476,5 +471,5 @@ void MenuResident(Resident& resident) {
                 cin.ignore();
                 cin.get();
         }
-    } while (choix != 4);
+    } while (choix != 3);
 }

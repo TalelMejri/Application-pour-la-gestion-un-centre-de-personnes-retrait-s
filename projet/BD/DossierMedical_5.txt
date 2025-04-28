@@ -4,12 +4,12 @@ Nom: bizou talel
 Medicaments:
 ------------
 ID Medicament: 4
-Nom: qdsq
+Nom: qsdsq
+Quantite: 4
+Date expiration: 1/5/5
+------------
+ID Medicament: 4
+Nom: qds
 Quantite: 4
 Date expiration: 1/5/2002
-------------
-ID Medicament: 5
-Nom: dq
-Quantite: 7
-Date expiration: 4/5/3000
 ------------
