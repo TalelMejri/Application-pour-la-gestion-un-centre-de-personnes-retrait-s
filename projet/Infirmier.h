@@ -26,12 +26,10 @@ public:
     Infirmier& operator=(const Infirmier&);
     Infirmier(const Infirmier&);
     void ecrirerInfirmierDansFichier();
-
     void afficherPersonne() ;
     void modifier() ;
-
     int getExperience() const { return experience; }
-    void setExperience(int exp) { experience = exp; }
+    void setExperience(int exp)  { experience = exp; }
 };
 
 #endif // INFIRMIER_H_INCLUDED

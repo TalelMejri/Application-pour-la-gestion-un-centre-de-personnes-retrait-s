@@ -37,11 +37,8 @@ MedecinInfirmier& MedecinInfirmier::operator=(const MedecinInfirmier& other) {
     return *this;
 }
 
-int MedecinInfirmier::getExperience() const {
-    return Infirmier::getExperience();
-}
 
-bool MedecinInfirmier::operator<(const MedecinInfirmier& other) {
+bool MedecinInfirmier::operator<( MedecinInfirmier& other) {
     return getExperience() < other.getExperience();
 }
 
@@ -67,10 +64,10 @@ void MedecinInfirmier::modifier() {
 
 ostream& operator<<(ostream& out, const MedecinInfirmier& mi) {
     out << static_cast<const Personnel&>(mi);
-    out << getSpecialite() << " ";
-    out << getExperience() << " ";
+    out << " " << mi.getSpecialite() << " ";
+    out << " " << mi.getExperience() << " ";
     out << "  " << mi.grade;
-    out << " " << mi.nbrOperation;
+    out << " " << mi.nbrOperation<<endl;
     return out;
 }
 
@@ -79,16 +76,22 @@ ostream& operator<<(ostream& out, const MedecinInfirmier* mi) {
 }
 
 istream& operator>>(istream& in, MedecinInfirmier& mi) {
-    string g;
-    int nbOp;
     in >> static_cast<Personnel&>(mi);
-    bool isConsole = (&in == &cin);
-    if (isConsole)
-    cout << "Entrer le grade: ";
-    in >> g;
-    if (isConsole)
-    cout << "Entrer le nombre d'operations: ";
-    in >> nbOp;
+
+    string specialite, grade;
+    int experience, nbrOperation;
+
+    bool isFile = (&in != &cin);  // Check if reading from a file or console
+
+    if (isFile) {
+        in >> specialite >> experience >> grade >> nbrOperation;
+
+        mi.setSpecialite(specialite);  // Set the specialite in Medecin
+        mi.setExperience(experience);  // Set the experience in Infirmier
+        mi.setGrade(grade);            // Set the grade in MedecinInfirmier
+        mi.SetNbrOperation(nbrOperation); // Set the nbrOperation in MedecinInfirmier
+    }
+
     return in;
 }
 

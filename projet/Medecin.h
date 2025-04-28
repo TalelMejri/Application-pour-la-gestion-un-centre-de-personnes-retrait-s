@@ -29,7 +29,7 @@ public:
     void SupprimerCategory(int);
     void afficherCategories();
 
-    string getSpecialite() { return specialite; }
+    string getSpecialite() const { return specialite; }
     vector<Category> getCategories() { return categories; }
 
     void setSpecialite(string specialiteVal) { specialite = specialiteVal; }

@@ -20,6 +20,4 @@
 #include "credentials.h"
 #include "utils.h"
 
-
-
 #endif // ENV_H_INCLUDED

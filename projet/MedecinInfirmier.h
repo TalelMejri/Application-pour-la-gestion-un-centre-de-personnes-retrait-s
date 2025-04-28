@@ -14,8 +14,7 @@ public:
     MedecinInfirmier(const MedecinInfirmier&);
 
     MedecinInfirmier& operator=(const MedecinInfirmier&);
-    int getExperience() const;
-    bool operator<(const MedecinInfirmier&);
+    bool operator<( MedecinInfirmier&);
     void ecrirerMedecinInfDansFichier();
 
     friend ostream& operator<<(ostream&, const MedecinInfirmier&);

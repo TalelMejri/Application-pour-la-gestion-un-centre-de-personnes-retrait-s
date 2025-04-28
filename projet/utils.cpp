@@ -112,21 +112,18 @@ void MenuResponsable(Responsable& responsable) {
             case 1: {
                 int typePersonnel;
     cout << "Quel type d'employe voulez-vous ajouter ?" << endl;
-    cout << "1. Personnel\n2. Medecin\n3. MedecinInfirmier\nVotre choix : ";
+    cout << "1. Medecin\n2. MedecinInfirmier\nVotre choix : ";
     cin >> typePersonnel;
 
     Personnel* emp = nullptr;
 
     if (typePersonnel == 1) {
-        emp = new Personnel();
-        cin >> *emp;
-    } else if (typePersonnel == 2) {
-        emp = new Medecin();
+           emp = new Medecin();
         cin >> *(dynamic_cast<Medecin*>(emp));
-    } else if (typePersonnel == 3) {
-        emp = new MedecinInfirmier();
+    } else if (typePersonnel == 2) {
+      emp = new MedecinInfirmier();
         cin >> *(dynamic_cast<MedecinInfirmier*>(emp));
-    } else {
+    }  else {
         cout << "Type d'employe invalide. Operation annulee.\n";
         break;
     }
