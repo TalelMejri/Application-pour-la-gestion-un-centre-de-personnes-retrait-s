@@ -10,6 +10,7 @@ class Responsable : public Personne {
 private:
     vector<Personnel*> employes;
     vector<Resident> residents;
+public:
     Batiment batiment;
 
 public:

@@ -5,6 +5,7 @@ void afficherChargement(const char* message, int duree) ;
 void LogoutUser();
 void resteConnecte(string email,string role);
 void MenuResponsable(Responsable res);
+void Connexion(credentials& connectedUser, credentials& c);
 template<typename T>
 T GetUserDetails( string email,  string role) {
     T user;
@@ -16,7 +17,7 @@ T GetUserDetails( string email,  string role) {
     else if(role=="MedecinInfirmier") filename = "BD\\MedecinInfirmier.txt";
     ifstream f(filename);
     if (!f.is_open()) {
-            cerr << "Erreur lors de louverture de Resident.txt" << endl;
+            cerr << "Erreur lors de louverture de "<< filename << endl;
             exit(-1);
     }
      while (f >> user) {
