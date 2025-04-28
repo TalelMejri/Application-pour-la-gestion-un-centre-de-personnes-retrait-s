@@ -12,8 +12,6 @@ Medecin::Medecin(int idVal, string nomVal, string prenomVal,  string CinVal,stri
 Medecin::Medecin(const Medecin& other)
     : Personnel(other),specialite(other.specialite), categories(other.categories) {}
 
-
-
 Medecin& Medecin::operator=(const Medecin& other) {
     if (this != &other) {
         Personnel::operator=(other);
@@ -88,7 +86,9 @@ ostream& operator<<(ostream& os, const Medecin& m) {
 
 istream& operator>>(istream& is, Medecin& m) {
     is >> static_cast<Personnel&>(m);
-    cout << "Entrer spécialité: ";
+    bool isConsole = (&is == &cin);
+    if (isConsole)
+    cout << "Entrer specialite: ";
     is >> m.specialite;
 
     /*char choix = 'o';

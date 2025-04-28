@@ -29,7 +29,6 @@ public:
     string getGrade() const { return grade; }
     void setGrade(const string& g) { grade = g; }
 
-
     int GetNbrOperation() const { return nbrOperation; }
     void SetNbrOperation(const int& g) { nbrOperation = g; }
 };

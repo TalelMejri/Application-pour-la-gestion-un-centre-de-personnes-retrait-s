@@ -29,7 +29,6 @@ public:
     void SupprimerCategory(int);
     void afficherCategories();
 
-
     string getSpecialite() { return specialite; }
     vector<Category> getCategories() { return categories; }
 

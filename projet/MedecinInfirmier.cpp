@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 MedecinInfirmier::MedecinInfirmier() : Medecin(), Infirmier() {
     nbrOperation = 0;
     grade = "";
@@ -67,9 +66,11 @@ void MedecinInfirmier::modifier() {
 }
 
 ostream& operator<<(ostream& out, const MedecinInfirmier& mi) {
-        out << static_cast<const Personnel&>(mi);
-        out<< "  " << mi.grade;
-        out<< " " << mi.nbrOperation;
+    out << static_cast<const Personnel&>(mi);
+    out << getSpecialite() << " ";
+    out << getExperience() << " ";
+    out << "  " << mi.grade;
+    out << " " << mi.nbrOperation;
     return out;
 }
 
@@ -81,12 +82,13 @@ istream& operator>>(istream& in, MedecinInfirmier& mi) {
     string g;
     int nbOp;
     in >> static_cast<Personnel&>(mi);
+    bool isConsole = (&in == &cin);
+    if (isConsole)
     cout << "Entrer le grade: ";
     in >> g;
+    if (isConsole)
     cout << "Entrer le nombre d'operations: ";
     in >> nbOp;
-    //mi.setGrade(g);
-    //mi.SetNbrOperation(nbOp);
     return in;
 }
 
@@ -104,6 +106,3 @@ void MedecinInfirmier::ecrirerMedecinInfDansFichier() {
     }
 }
 
-/*void MedecinInfirmier::lireDepuisFichier(ifstream& in) {
-
-}*/

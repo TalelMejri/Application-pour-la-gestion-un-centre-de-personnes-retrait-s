@@ -54,8 +54,11 @@ istream& operator>>(istream& in, Personnel& p) {
    /* Personne*q =&p;
     in>>*q;*/
     in >> static_cast <Personne&>(p);
+    bool isConsole = (&in == &cin);
+    if (isConsole)
     cout << "Poste: ";
     in >> p.poste;
+    if (isConsole)
     cout << "Salaire: ";
     in >> p.salaire;
     return in;
@@ -87,7 +90,7 @@ ostream& operator<<(ostream& out, const Personnel* p) {
    /* Personne*q =&p;
     out<<*q; */
     out << static_cast <const Personne*>(p);
-    out << "Poste: " << p->poste << endl;
-    out << "Salaire: " << p->salaire << " TND" << endl;
+    out << " " << p->poste ;
+    out << " " << p->salaire << endl;
     return out;
 }

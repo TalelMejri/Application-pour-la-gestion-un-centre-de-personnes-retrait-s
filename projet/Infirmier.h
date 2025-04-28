@@ -3,7 +3,9 @@
 #include "Personnel.h"
 #include <map >
 #include <vector >
+
 using namespace std;
+
 class Infirmier :virtual  public Personnel {
 protected:
     int experience;

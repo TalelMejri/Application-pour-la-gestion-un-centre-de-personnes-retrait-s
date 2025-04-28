@@ -66,28 +66,27 @@ void Resident::modifier() {
 void Resident::modifierSolde(float nouveauSolde) {
     solde = nouveauSolde;
 }
-
+/*
 ostream& operator<<(ostream& os, const Resident& r) {
     os << static_cast<const Personne&>(r);
-    os << r.solde << " ";
-    os << "0" << endl;
-  /*  if (r.dossierMedical)
+    os << r.solde << endl;
+   if (r.dossierMedical)
         os<<r.dossierMedical;
     else
-        os << "0" << endl;*/
+        os << "0" << endl;
     return os;
 }
-
+*/
 ostream& operator<<(ostream& os, const Resident* r) {
      os << static_cast<const Personne*>(r);
-    os << r->solde ;
+    os << r->solde<<" " ;
     if (r->dossierMedical)
         os<<r->dossierMedical;
     else
         os << "0" << endl;
     return os;
 }
-
+/*
 istream& operator>>(istream& is, Resident& r) {
     is >> static_cast <Personne&>(r);
      r.solde = 0;
@@ -99,12 +98,37 @@ istream& operator>>(istream& is, Resident& r) {
         //is>>r.dossierMedical;
     }
     return is;
+}*/
+
+ostream& operator<<(ostream& os, const Resident& r) {
+    os << static_cast<const Personne&>(r);
+    os << r.solde<<" ";
+    if (r.dossierMedical)
+        os << *r.dossierMedical;
+    else
+        os << "0" << endl;
+
+    return os;
 }
 
 istream& operator>>(istream& is, Resident* r) {
     is >> static_cast <Personne*>(r);
-     r->solde = 0;
-    //is >> r->solde;
+    is >> r->solde;
+    return is;
+}
+
+istream& operator>>(istream& is, Resident& r) {
+    bool isConsole = (&is == &cin);
+    is >> static_cast <Personne&>(r);
+    if (!isConsole) {
+        is >> r.solde;
+        string test;
+        is >> test;
+        if (test == "0") {
+            r.dossierMedical = nullptr;
+        } else {
+        }
+    }
     return is;
 }
 
@@ -117,3 +141,5 @@ void Resident::ecrirerResidentDansFichier(){
         cerr<<"Erreur"<<e.what();
     }
 }
+
+

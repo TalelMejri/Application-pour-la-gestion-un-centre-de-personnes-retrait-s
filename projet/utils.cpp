@@ -218,6 +218,7 @@ void MenuResponsable(Responsable& responsable) {
                 break;
             }
             case 0:
+                LogoutUser();
                 cout << "Au revoir !" << endl;
                 break;
             default:

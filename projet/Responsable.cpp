@@ -3,12 +3,16 @@ using namespace std;
 
 Responsable::Responsable() : Personne() {
     LireResidentFromFichier();
+    LireMedecinFromFichier();
+    LireMedecinInfirmierFromFichier();
 }
 
 Responsable::Responsable(int id, string nom, string prenom, string cinn, string email, string password, string tlf, DatePerso date_naissance)
     : Personne(id, nom, prenom, cinn, email, password, tlf, date_naissance) {
             LireResidentFromFichier();
-    }
+            LireMedecinFromFichier();
+            LireMedecinInfirmierFromFichier();
+}
 
 Responsable::~Responsable() {
     for (int i = 0; i < employes.size(); i++) {
@@ -76,7 +80,7 @@ ostream& operator<<(ostream& os, const Responsable& r) {
         os << res<< " ";
     }
 
-   // os <<  r.batiment;
+    os <<  r.batiment;
 
     return os;
 }
@@ -96,7 +100,7 @@ ostream& operator<<(ostream& os, const Responsable* r) {
         os << res<< " ";
     }
 
-   // os <<  r.batiment;
+   os <<  r->batiment;
 
     return os;
 }
@@ -130,13 +134,15 @@ void Responsable::ajouterEmploye(Personnel* employe) {
     }
 }
 
-
 void Responsable::supprimerEmploye(int id) {
     for (size_t i = 0; i < employes.size(); ++i) {
         if (employes[i]->getId() == id) {
+            int test=typeid(employes[i])==typeid(Medecin) ? 1 : 0;
             delete employes[i];
             employes.erase(employes.begin() + i);
-            cout << "Employé supprimé avec succès.\n";
+            cout << "Employe supprime avec succes.\n";
+            if(test==1) sauvegarderMedecinDansFichier();
+            else sauvegarderMedecinInfirmierDansFichier();
             return;
         }
     }
@@ -149,21 +155,29 @@ void Responsable::afficherEmployes() {
         return;
     }
     cout << "Liste des employes :\n";
-    cout<<employes.size();
     for (Personnel* p : employes) {
-        cout << *p << endl;
+        if (typeid(*p) == typeid(Medecin)) {
+            Medecin* medecin = dynamic_cast<Medecin*>(p);
+            cout<<medecin;
+        } else if(typeid(*p)==typeid(MedecinInfirmier)) {
+            MedecinInfirmier* medecinInf = dynamic_cast<MedecinInfirmier*>(p);
+            cout<<medecinInf;
+        }
     }
 }
 
 void Responsable::modifier(int id) {
     for (Personnel* p : employes) {
         if (p->getId() == id) {
-            cout << "Modification de l'employé avec ID " << id << " :\n";
+            int test=typeid(*p)==typeid(Medecin) ? 1 : 0;
+            cout << "Modification de lemploye avec ID " << id << " :\n";
             p->modifier();
+            if(test==1) sauvegarderMedecinDansFichier();
+            else sauvegarderMedecinInfirmierDansFichier();
             return;
         }
     }
-    cout << "Aucun employé trouvé avec cet ID.\n";
+    cout << "Aucun employe trouve avec cet ID.\n";
 }
 
 int Responsable::rechercherEmploye(int id) {
@@ -179,21 +193,105 @@ void Responsable::LireResidentFromFichier(){
             ifstream of("BD\\Resident.txt");
             Resident r;
            while (of >> r) {
-            residents.push_back(r);
-        }
+                residents.push_back(r);
+            }
             of.close();
     }catch(exception e){
         cerr<<"Erreur"<<e.what();
     }
 }
 
+void Responsable::LireMedecinFromFichier(){
+      try{
+            ifstream of("BD\\Medecin.txt");
+            Medecin r;
+           while (of >> r) {
+                employes.push_back(new Medecin(r));
+            }
+            of.close();
+    }catch(exception e){
+        cerr<<"Erreur"<<e.what();
+    }
+}
+
+void Responsable::LireMedecinInfirmierFromFichier(){
+      try{
+            ifstream of("BD\\MedecinInfirmier.txt");
+            MedecinInfirmier r;
+           while (of >> r) {
+                employes.push_back(new MedecinInfirmier(r));
+            }
+            of.close();
+    }catch(exception e){
+        cerr<<"Erreur"<<e.what();
+    }
+}
+
+void Responsable::sauvegarderResidentsDansFichier() {
+    try {
+        ofstream of("BD\\Resident.txt", ios::trunc);
+        if (!of) {
+            cerr << "Erreur lors de l'ouverture du fichier pour l'écriture.\n";
+            return;
+        }
+
+        for (const auto& resident : residents) {
+            of << resident << endl ;
+        }
+
+        of.close();
+        cout << "Residents mis a jour dans le fichier avec succe.\n";
+    } catch (exception& e) {
+        cerr << "Erreur lors de la sauvegarde des residents : " << e.what() << endl;
+    }
+}
+
+void Responsable::sauvegarderMedecinDansFichier() {
+    try {
+        ofstream of("BD\\Medecin.txt", ios::trunc);
+        if (!of) {
+            cerr << "Erreur lors de l'ouverture du fichier pour l'écriture.\n";
+            return;
+        }
+
+      for (int i=0;i<employes.size();i++) {
+            of << employes[i] << endl ;
+      }
+
+        of.close();
+        cout << "Medecin mis a jour dans le fichier avec succe.\n";
+    } catch (exception& e) {
+        cerr << "Erreur lors de la sauvegarde des residents : " << e.what() << endl;
+    }
+}
+
+
+void Responsable::sauvegarderMedecinInfirmierDansFichier() {
+    try {
+        ofstream of("BD\\MedecinInfirmier.txt", ios::trunc);
+        if (!of) {
+            cerr << "Erreur lors de l'ouverture du fichier pour l'écriture.\n";
+            return;
+        }
+
+      for (int i=0;i<employes.size();i++) {
+            of << employes[i] << endl ;
+      }
+
+        of.close();
+        cout << "MedecinInfirmier mis a jour dans le fichier avec succe.\n";
+    } catch (exception& e) {
+        cerr << "Erreur lors de la sauvegarde des residents : " << e.what() << endl;
+    }
+}
+
 void Responsable::AfficherResident() {
         if (residents.empty()) {
-            cout << "Aucun résident enregistré.\n";
+            cout << "Aucun resident enregistre.\n";
             return;
         }
         for (int i=0;i<residents.size();i++) {
-            cout <<residents[i]<< endl;
+            cout <<residents[i]<<endl;
         }
 }
 
@@ -209,21 +307,23 @@ int Responsable::RechercherResident(int id) {
 void Responsable::ModifierResident(int id) {
         int index = RechercherResident(id);
         if (index == -1) {
-            cout << "Résident non trouvé.\n";
+            cout << "Reident non trouve.\n";
             return;
         }
         residents[index].modifier();
-        cout << "Résident modifié avec succès.\n";
+        sauvegarderResidentsDansFichier();
+        cout << "Resident modifie avec succes.\n";
 }
 
  void Responsable::SupprimerResident(int id) {
         int index = RechercherResident(id);
         if (index == -1) {
-            cout << "Résident non trouvé.\n";
+            cout << "Resident non trouve.\n";
             return;
         }
         residents.erase(residents.begin() + index);
-        cout << "Résident supprimé avec succès.\n";
+        sauvegarderResidentsDansFichier();
+        cout << "Resident supprime avec succes.\n";
 }
 
 void Responsable::afficherPersonne() {
@@ -233,4 +333,3 @@ void Responsable::afficherPersonne() {
  void Responsable::modifier(){
     Personne::modifier();
  }
-

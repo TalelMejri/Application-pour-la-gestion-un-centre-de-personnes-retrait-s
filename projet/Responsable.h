@@ -24,6 +24,9 @@ public:
     friend istream& operator>>(istream&, Responsable*);
     Responsable(const Responsable &);
     Responsable& operator=(const Responsable&);
+    void sauvegarderResidentsDansFichier();
+    void sauvegarderMedecinDansFichier();
+    void sauvegarderMedecinInfirmierDansFichier();
     void afficherPersonne();
     void modifier();
     void ajouterEmploye(Personnel* employe);
@@ -32,6 +35,8 @@ public:
     void modifier(int id);
     int rechercherEmploye(int);
     void LireResidentFromFichier();
+    void LireMedecinFromFichier();
+    void LireMedecinInfirmierFromFichier();
 
     void SupprimerResident(int id);
     void AfficherResident();
