@@ -46,7 +46,3 @@ int main() {
     return 0;
 }
 
-/*else if (connectedUser.role == "MedecinInfirmier") {
-            MedecinInfirmier medInf = GetUserDetails<MedecinInfirmier>(connectedUser.email, connectedUser.role);
-            // MenuMedecinInfirmier(medInf);
-}*/

@@ -188,7 +188,7 @@ istream& operator>>(istream& in, Personne* p)
 
             cout << "Entrez le prenom : ";
             in >> p->prenom;
-            if (p->prenom.empty()) throw invalid_argument("Le prénom ne peut pas etre vide.");
+            if (p->prenom.empty()) throw invalid_argument("Le prenom ne peut pas etre vide.");
 
             cout << "Entrez le CIN : ";
             in >> p->cinn;
@@ -198,9 +198,6 @@ istream& operator>>(istream& in, Personne* p)
 
             cout << "Entrez lemail : ";
             in >> p->email;
-            /*if (p.email.find('@') == string::npos || p.email.find('.') == string::npos) {
-                throw invalid_argument("Email invalide.");
-            }*/
 
             cout << "Entrez le mot de passe : ";
             in >> p->password;

@@ -35,7 +35,7 @@ void Connexion(credentials& connectedUser, credentials& c) {
     do {
         cout << "\n----- Bienvenue -----" << endl;
         cout << "1. Se connecter" << endl;
-        cout << "2. S'inscrire" << endl;
+        cout << "2. S inscrire" << endl;
         cout << "3. Quitter" << endl;
         cout << "Choix: ";
         cin >> choix;
@@ -76,12 +76,12 @@ void Connexion(credentials& connectedUser, credentials& c) {
             res.ecrirerResidentDansFichier();
             c.SaveCredentials(res.getEmail(), res.getPassword(), "Resident");
             afficherChargement("Enregistrement", 1);
-            cout << "\nInscription réussie ! Vous pouvez maintenant vous connecter.\n";
+            cout << "\nInscription reussie ! Vous pouvez maintenant vous connecter.\n";
         } else if (choix == 3) {
             afficherChargement("Au Revoir", 2);
             exit(0);
         } else {
-            cout << "Choix invalide. Veuillez réessayer.\n";
+            cout << "Choix invalide. Veuillez reessayer.\n";
         }
         cout << "\nAppuyez sur Entrée pour continuer...";
         cin.ignore();
@@ -111,7 +111,7 @@ void MenuResponsable(Responsable& responsable) {
         switch (choix) {
             case 1: {
                 int typePersonnel;
-                cout << "Quel type d'employe voulez-vous ajouter ?" << endl;
+                cout << "Quel type demploye voulez-vous ajouter ?" << endl;
                 cout << "1. Medecin\n2. MedecinInfirmier\nVotre choix : ";
                 cin >> typePersonnel;
 
@@ -141,7 +141,7 @@ void MenuResponsable(Responsable& responsable) {
             }
             case 3: {
                 int id;
-                cout << "ID de l'employe a modifier : ";
+                cout << "ID de lemploye a modifier : ";
                 cin >> id;
                 responsable.modifier(id);
                 break;
@@ -204,7 +204,7 @@ void MenuResponsable(Responsable& responsable) {
                         typeStr = "Neurologie";
                         nouvelEtage = new EtageNeurologie(-1, nbr_chambre, typeStr);
                     } else {
-                        cout << "Type d'etage invalide." << endl;
+                        cout << "Type detage invalide." << endl;
                         break;
                     }
 
@@ -214,10 +214,10 @@ void MenuResponsable(Responsable& responsable) {
 
                 } else if (sousChoix == 2) {
                     responsable.batiment.afficherEtage();
-                    cout << "Entrez le type d'etage a supprimer : ";
+                    cout << "Entrez le type detage a supprimer : ";
                     string type;
                     cin >> type;
-                    cout << "Entrez l'ID de l'etage a supprimer : ";
+                    cout << "Entrez ID de letage a supprimer : ";
                     int id;
                     cin >> id;
                     responsable.batiment.supprimerEtage(type, id);
@@ -294,7 +294,7 @@ void MenuMedecin(Medecin& med, vector<Resident> res) {
                             nouvelInfirmier->ecrirerInfirmierDansFichier();
                             credentials c;
                             c.SaveCredentials(nouvelInfirmier->getEmail(), nouvelInfirmier->getPassword(), "Infirmier");
-                            cout << "Infirmier ajouté et assigné avec succès!\n";
+                            cout << "Infirmier ajoute et assigne avec succes!\n";
                             break;
                         }
                         case 3:

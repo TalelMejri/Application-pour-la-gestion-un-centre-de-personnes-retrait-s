@@ -23,7 +23,7 @@ void Infirmier::afficherPersonne() {
 
 void Infirmier::modifier() {
     Personnel::modifier();
-    cout << "Modifier l'experience de l'infirmier (en annees): ";
+    cout << "Modifier l'experience de linfirmier (en annees): ";
     cin >> experience;
     cout << "Experience mise a jour: " << experience << " ans" << endl;
 }
@@ -32,14 +32,14 @@ void Infirmier::saisirHoraires() {
     map<string, pair<string, string>> nouveauxHoraires;
     string jour;
 
-    cout << "Saisir les jours pour lesquels vous souhaitez définir les horaires (tapez 'fin' pour terminer) : " << endl;
+    cout << "Saisir les jours pour lesquels vous souhaitez definir les horaires (tapez 'fin' pour terminer) : " << endl;
     while (true) {
         cout << "Saisir un jour (ou 'fin') : ";
         cin >> jour;
         if (jour == "fin") break;
 
         string heureDebut, heureFin;
-        cout << "Heure de début pour " << jour << " : ";
+        cout << "Heure de debut pour " << jour << " : ";
         cin >> heureDebut;
         cout << "Heure de fin pour " << jour << " : ";
         cin >> heureFin;
@@ -58,7 +58,7 @@ void Infirmier::afficherHoraires()  {
         if (it != horaires.end()) {
             cout << jour << ": " << it->second.first << " - " << it->second.second << endl;
         } else {
-            cout << jour << ": Horaires non spécifiés" << endl;
+            cout << jour << ": Horaires non specifies" << endl;
         }
     }
 }
@@ -82,7 +82,7 @@ istream& operator>>(istream& in, Infirmier& inf) {
     in >> static_cast<Personnel&>(inf);
     bool isConsole = (&in == &cin);
     if(isConsole){
-        cout << "Entrer l'expérience (en annees) : ";
+        cout << "Entrer lexperience (en annees) : ";
     }
     in >> inf.experience;
         if(isConsole){

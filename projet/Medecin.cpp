@@ -85,7 +85,7 @@ void Medecin::sauvegarderDossierMedical( Resident resident) {
     try {
         ofstream file(filename);
         if (!file.is_open()) {
-            throw runtime_error("Impossible d'ouvrir le fichier");
+            throw runtime_error("Impossible douvrir le fichier");
         }
 
         file << "=== Dossier Medical du Resident ID: " << resident.getId() << " ===\n";
@@ -128,7 +128,7 @@ void Medecin::afficherCategories() {
     cout << "Categories du medecin :" << endl;
 
     if (categories.empty()) {
-        cout << "Aucune catégorie." << endl;
+        cout << "Aucune categorie." << endl;
         return;
     }
 
@@ -145,14 +145,14 @@ void Medecin::SupprimerCategory(int pos) {
     }
 
     categories.erase(categories.begin() + pos);
-    cout << "Catégorie à la position " << pos << " supprimée." << endl;
+    cout << "Categorie à la position " << pos << " supprimee." << endl;
 }
 
 void Medecin::sauvegarderInfDansFichier() {
     try {
         ofstream of("BD\\Infirmier.txt", ios::trunc);
         if (!of) {
-            cerr << "Erreur lors de l'ouverture du fichier pour l'écriture.\n";
+            cerr << "Erreur lors de louverture du fichier pour lecriture.\n";
             return;
         }
 
@@ -173,18 +173,13 @@ void Medecin::ModifierCategory(int pos) {
         return;
     }
 
-    cout << "Modification de la catégorie à la position " << pos << ":" << endl;
+    cout << "Modification de la categorie à la position " << pos << ":" << endl;
     categories[pos].modifier();
 }
 
 ostream& operator<<(ostream& os, const Medecin& m) {
     os << static_cast<const Personnel&>(m);
     os << " "<< m.specialite << endl;
-
-   /* for (const Category& c : m.categories) {
-        os << c;
-    } */
-
     return os;
 }
 
@@ -203,16 +198,16 @@ ostream& operator<<(ostream& os, const Medecin* m) {
 
 void Medecin::assignerInfirmier(Infirmier* inf) {
         infirmiersAssignes.push_back(inf);
-        cout << "Infirmier assigné avec succes!\n";
+        cout << "Infirmier assigne avec succes!\n";
 }
 
 void Medecin::afficherInfirmiersAssignes() const {
     if (infirmiersAssignes.empty()) {
-        cout << "Aucun infirmier assigné.\n";
+        cout << "Aucun infirmier assigne.\n";
         return;
     }
 
-    cout << "Liste des infirmiers assignés (" << infirmiersAssignes.size() << "):\n";
+    cout << "Liste des infirmiers assignes (" << infirmiersAssignes.size() << "):\n";
     for (size_t i = 0; i < infirmiersAssignes.size(); ++i) {
         cout << i+1 << ". ";
         infirmiersAssignes[i]->afficherPersonne();
@@ -225,7 +220,7 @@ void Medecin::modifierInfirmierAssignes() {
     if (infirmiersAssignes.empty()) return;
 
     int choix;
-    cout << "Entrez le numéro de l'infirmier à modifier: ";
+    cout << "Entrez le numero de linfirmier a modifier: ";
     cin >> choix;
 
     if (choix < 1 || choix > static_cast<int>(infirmiersAssignes.size())) {
@@ -235,7 +230,7 @@ void Medecin::modifierInfirmierAssignes() {
 
     infirmiersAssignes[choix-1]->modifier();
     sauvegarderInfDansFichier();
-    cout << "Infirmier modifié avec succès!\n";
+    cout << "Infirmier modifie avec succes!\n";
 }
 
 void Medecin::supprimerInfirmierAssignes() {
@@ -243,17 +238,17 @@ void Medecin::supprimerInfirmierAssignes() {
     if (infirmiersAssignes.empty()) return;
 
     int choix;
-    cout << "Entrez le numéro de l'infirmier à supprimer: ";
+    cout << "Entrez le numero de linfirmier a supprimer: ";
     cin >> choix;
 
     if (choix < 1 || choix > static_cast<int>(infirmiersAssignes.size())) {
-        cout << "Numéro invalide!\n";
+        cout << "Numero invalide!\n";
         return;
     }
 
     infirmiersAssignes.erase(infirmiersAssignes.begin() + choix - 1);
     sauvegarderInfDansFichier();
-    cout << "Infirmier supprimé avec succès!\n";
+    cout << "Infirmier supprime avec succes\n";
 }
 
 
@@ -271,7 +266,7 @@ void Medecin::LireInfirmierFromFichier(){
 }
 
 void Medecin::loadReclamations() {
-    ifstream file("BD/reclamations.txt");
+    ifstream file("BD\\reclamations.txt");
     if (!file.is_open()) {
         cerr << "Erreur lors de l'ouverture du fichier reclamations.txt" << endl;
         return;
@@ -307,7 +302,7 @@ void Medecin::AfficherReclamations() {
 
 istream& operator>>(istream& is, Medecin* m) {
     is >> *static_cast<Personnel*>(m);
-    cout << "Entrer spécialité: ";
+    cout << "Entrer specialite: ";
     is >> m->specialite;
     return is;
 }

@@ -109,9 +109,9 @@ void DossierMedical::modifierMedicamentParId(int id, Medicament* nouveauMedicame
         auto it = medicaments.begin();
         advance(it, index);
         *it = nouveauMedicament;
-        cout << "Médicament modifié avec succès." << endl;
+        cout << "Medicament modifie avec succes." << endl;
     } else {
-        cout << "Médicament non trouvé." << endl;
+        cout << "Medicament non trouve." << endl;
     }
 }
 
@@ -122,8 +122,8 @@ void DossierMedical::supprimerMedicamentParId(int id) {
         advance(it, index);
         delete *it;
         medicaments.erase(it);
-        cout << "Médicament supprimé avec succès." << endl;
+        cout << "Medicament supprime avec succes." << endl;
     } else {
-        cout << "Médicament non trouvé." << endl;
+        cout << "Medicament non trouve." << endl;
     }
 }

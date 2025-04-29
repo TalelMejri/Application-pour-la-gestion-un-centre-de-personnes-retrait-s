@@ -128,10 +128,10 @@ void Responsable::ajouterEmploye(Personnel* employe) {
         c.SaveCredentials(employe->getEmail(), employe->getPassword(), "MedecinInfirmier");
         MedecinInfirmier* medecinInf = dynamic_cast<MedecinInfirmier*>(employe);
         medecinInf->ecrirerMedecinInfDansFichier();
-        cout << "Médecin-infirmier ajoute avec succes.\n";
+        cout << "Medecin-infirmier ajoute avec succes.\n";
     }
     else {
-        cout << "Erreur : Seuls les médecins ou medecins-infirmiers peuvent être ajoutes.\n";
+        cout << "Erreur : Seuls les médecins ou medecins-infirmiers peuvent etre ajoutes.\n";
         delete employe;
     }
 }
@@ -148,7 +148,7 @@ void Responsable::supprimerEmploye(int id) {
             return;
         }
     }
-    cout << "Aucun employé avec cet ID.\n";
+    cout << "Aucun employe avec cet ID.\n";
 }
 
 void Responsable::afficherEmployes() {
@@ -233,7 +233,7 @@ void Responsable::sauvegarderResidentsDansFichier() {
     try {
         ofstream of("BD\\Resident.txt", ios::trunc);
         if (!of) {
-            cerr << "Erreur lors de l'ouverture du fichier pour l'écriture.\n";
+            cerr << "Erreur lors de louverture du fichier pour lecriture.\n";
             return;
         }
 
@@ -252,7 +252,7 @@ void Responsable::sauvegarderMedecinDansFichier() {
     try {
         ofstream of("BD\\Medecin.txt", ios::trunc);
         if (!of) {
-            cerr << "Erreur lors de l'ouverture du fichier pour l'écriture.\n";
+            cerr << "Erreur lors de louverture du fichier pour lecriture.\n";
             return;
         }
 
@@ -271,7 +271,7 @@ void Responsable::sauvegarderMedecinInfirmierDansFichier() {
     try {
         ofstream of("BD\\MedecinInfirmier.txt", ios::trunc);
         if (!of) {
-            cerr << "Erreur lors de l'ouverture du fichier pour l'écriture.\n";
+            cerr << "Erreur lors de louverture du fichier pour lecriture.\n";
             return;
         }
 
@@ -308,7 +308,7 @@ int Responsable::RechercherResident(int id) {
 void Responsable::ModifierResident(int id) {
         int index = RechercherResident(id);
         if (index == -1) {
-            cout << "Reident non trouve.\n";
+            cout << "Resident non trouve.\n";
             return;
         }
         residents[index].modifier();

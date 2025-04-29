@@ -48,7 +48,7 @@ void MedecinInfirmier::afficherPersonne() {
     cout << "Specialite: " << getSpecialite() << endl;
     cout << "Experience: " << getExperience() << " ans" << endl;
     cout << "Grade: " << grade << endl;
-    cout << "Nombre d'operations: " << nbrOperation << endl;
+    cout << "Nombre doperations: " << nbrOperation << endl;
 }
 
 void MedecinInfirmier::modifier() {
@@ -81,15 +81,15 @@ istream& operator>>(istream& in, MedecinInfirmier& mi) {
     string specialite, grade;
     int experience, nbrOperation;
 
-    bool isFile = (&in != &cin);  // Check if reading from a file or console
+    bool isFile = (&in != &cin);
 
     if (isFile) {
         in >> specialite >> experience >> grade >> nbrOperation;
 
-        mi.setSpecialite(specialite);  // Set the specialite in Medecin
-        mi.setExperience(experience);  // Set the experience in Infirmier
-        mi.setGrade(grade);            // Set the grade in MedecinInfirmier
-        mi.SetNbrOperation(nbrOperation); // Set the nbrOperation in MedecinInfirmier
+        mi.setSpecialite(specialite);
+        mi.setExperience(experience);
+        mi.setGrade(grade);
+        mi.SetNbrOperation(nbrOperation);
     }
 
     return in;

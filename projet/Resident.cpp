@@ -153,7 +153,7 @@ void Resident::consulterDossierMedical() const {
 
     ifstream file(filename);
     if (!file.is_open()) {
-        cout << "Impossible d'ouvrir votre dossier medical.\n";
+        cout << "Impossible douvrir votre dossier medical.\n";
         return;
     }
 

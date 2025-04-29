@@ -54,7 +54,6 @@ Batiment::Batiment(const Batiment& other) : nom(other.nom), adresse(other.adress
 
 Batiment& Batiment::operator=(const Batiment& other) {
     if (this != &other) {
-        // Nettoyer les données existantes
         for (auto& pair : etages) {
             for (Etage* etage : pair.second) {
                 delete etage;
@@ -110,7 +109,7 @@ void Batiment::afficherBatiment() {
     cout << "Adresse: " << adresse << endl;
     cout << "Etages: " << endl;
     for (const auto& pair : etages) {
-        cout << "Type: " << pair.first << " (" << pair.second.size() << " étages)" << endl;
+        cout << "Type: " << pair.first << " (" << pair.second.size() << " etages)" << endl;
         for (Etage* etage : pair.second) {
             etage->afficherEtage();
         }
@@ -151,7 +150,7 @@ ostream& operator <<(ostream& os, const Batiment& batiment) {
     os << "Adresse: " << batiment.adresse << endl;
     os << "Etages: " << endl;
     for (const auto& pair : batiment.etages) {
-        os << "Type: " << pair.first << " (" << pair.second.size() << " étages)" << endl;
+        os << "Type: " << pair.first << " (" << pair.second.size() << " etages)" << endl;
         for (Etage* etage : pair.second) {
             os << *etage;
         }
@@ -168,7 +167,7 @@ ostream& operator <<(ostream& os, const Batiment* batiment) {
     os << "Adresse: " << batiment->adresse << endl;
     os << "Etages: " << endl;
     for (const auto& pair : batiment->etages) {
-        os << "Type: " << pair.first << " (" << pair.second.size() << " étages)" << endl;
+        os << "Type: " << pair.first << " (" << pair.second.size() << " etages)" << endl;
         for (Etage* etage : pair.second) {
             os << *etage;
         }
@@ -217,9 +216,9 @@ void Batiment::enregistrerEtages() {
 
 void Batiment::afficherEtage() {
     if (etages.empty()) {
-        cout << "Aucun étage enregistré dans le bâtiment." << endl;
+        cout << "Aucun etage enregistre dans le batiment." << endl;
     } else {
-        cout << "===== Liste des étages du bâtiment =====" << endl;
+        cout << "===== Liste des etages du batiment =====" << endl;
         for (const auto& pair : etages) {
             cout << "Type: " << pair.first << " (" << pair.second.size() << " etages)" << endl;
             for (Etage* etage : pair.second) {
@@ -233,7 +232,7 @@ void Batiment::afficherEtage() {
 void Batiment::chargerEtages() {
     ifstream in("BD\\Etage.txt");
     if (!in.is_open()) {
-        cerr << "Erreur lors de l'ouverture du fichier." << endl;
+        cerr << "Erreur lors de louverture du fichier." << endl;
         return;
     }
 
@@ -262,7 +261,7 @@ void Batiment::sauvegarderEtageDansFichier() {
     try {
         ofstream of("BD\\Etage.txt", ios::trunc);
         if (!of) {
-            cerr << "Erreur lors de l'ouverture du fichier pour l'écriture.\n";
+            cerr << "Erreur lors de louverture du fichier pour lecriture.\n";
             return;
         }
 
@@ -283,8 +282,8 @@ void Batiment::sauvegarderEtageDansFichier() {
         }
 
         of.close();
-        cout << "Etages mis à jour dans le fichier avec succès.\n";
+        cout << "Etages mis a jour dans le fichier avec succes.\n";
     } catch (exception& e) {
-        cerr << "Erreur lors de la sauvegarde des étages : " << e.what() << endl;
+        cerr << "Erreur lors de la sauvegarde des etages : " << e.what() << endl;
     }
 }

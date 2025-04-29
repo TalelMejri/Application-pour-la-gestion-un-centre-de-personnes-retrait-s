@@ -50,7 +50,7 @@ void Category::ModifierMedicament(int idMed) {
             return;
         }
     }
-    cout << "Medicament avec ID " << idMed << " non trouvé.\n";
+    cout << "Medicament avec ID " << idMed << " non trouve.\n";
 }
 
 void Category::SupprimerMedicament(int idMed) {
